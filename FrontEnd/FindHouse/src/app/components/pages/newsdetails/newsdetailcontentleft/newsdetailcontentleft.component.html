@@ -1,0 +1,30 @@
+
+<div class="listing-details-wrap" *ngIf="news != null">
+    <div class="listing-widget gallery-slider">
+        <h3 class="title">{{news.title}}</h3>
+        <p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '660px', 'margin-top':'2em'}" [numVisible]="5"
+        thumbnailsPosition="bottom">
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.photo" style="max-width: 660px; display: block; max-height: 396px; min-height: 396px;" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="grid grid-nogutter justify-content-center">
+                <img [src]="item.photo" style="max-height:100px ; width: auto;"/>
+            </div>
+        </ng-template>
+    </p-galleria>
+        
+           
+    
+    </div>
+    
+    <div class="listing-widget listing-widget-desc">
+        <h3 class="title">Description</h3>
+        <div [innerHTML]="content"></div>
+  
+    </div>
+   
+
+    <ifarme></ifarme>
+
+</div>

@@ -1,0 +1,155 @@
+<div class="inner-banner inner-bg8">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>My Live Box</h3>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>           
+                 <li *ngIf="checkRole == 'admin'"><a routerLink="/admin" >Admin Dashboard</a></li>
+                 <li *ngIf="checkRole == 'privateseller'"><a routerLink="/privatesale" >My Dashboard</a></li>
+                 <li *ngIf="checkRole == 'visitor'"><a routerLink="/visitor" >My Dashboard</a></li>
+                 <li><i class='bx bx-chevron-right'></i></li>  
+                 <li><a routerLink="/messages" >My messages Box</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>     
+                <li>My Live Box</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div class="card" style="border: none;">
+                <div class="card-body">
+                    <div *ngIf="(messageService.messageThread$ | async)!.length === 0">
+                        No messages
+                    </div>
+            
+                    <ul *ngIf="(messageService.messageThread$ | async)!.length > 0">
+                        <li *ngFor="let message of (messageService.messageThread$ | async)" class="mb-1 border-bottom border-light" style="list-style: none;">
+                            <div class="d-flex justify-content-between align-items-center" *ngIf="styleshow===2">
+                                <div class="row" *ngIf="message.senderUsername ==='superadmin'" style="width: 100%;">
+                                    <div class="col-lg-6" >
+                                        <span  style="color: #6610f2;float: left;">
+                                            {{message.senderUsername}}
+                                        </span>
+                                       
+                                        <br>
+                                        <p style="float: left;text-align: left;margin-bottom: 0px;" >{{message.content}}</p>
+                                        <br>
+                                        <small class="text-muted">
+                                            <span >{{message.messageSent | date: 'short'}}</span>
+        
+                                        </small>
+                                    </div>
+                                    <div class="col-lg-6" ></div>
+                                </div>
+                                <div class="row" *ngIf="message.senderUsername !=='superadmin'" style="width: 100%;">
+                                    <div class="col-lg-6" ></div>
+                                    <div class="col-lg-6" >
+                                        <span  style="color: #204887;float: right;">
+                                            {{message.senderUsername}}
+                                        </span>
+                                        <br>
+                                        <p style="float: right;text-align: right;margin-bottom: 0px;" >{{message.content}}</p>
+                                        <small class="text-muted">
+                                            <!-- <span >{{message.messageSent | date: 'short'}}</span> -->
+                                            <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username" style="float: right;text-align: right;">
+                                                <img src="../../../assets/img/check1.png" title="unread">
+                                            </span>
+                                            <span class="text-success" *ngIf="message.dateRead && message.senderUsername !== username" style="float: right;text-align: right;">
+                                                <img src="../../../assets/img/check.png" title="read">
+                                            </span>
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                              
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center row" *ngIf="styleshow===1">
+                                <div class="row" *ngIf="message.senderUsername !=='superadmin'" style="width: 100%;">
+                                    <div class="col-lg-6" >
+                                        <span  style="color: #6610f2;float: left;">
+                                            {{message.senderUsername}}
+                                        </span>
+                                        <br>
+                                        <p style="float: left;text-align: left;margin-bottom: 0px;" >{{message.content}}</p>
+                                        <br>
+                                        <!-- <small class="text-muted">
+                                            <span >{{message.messageSent | date: 'short'}}</span>
+                                            <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username" style="float: left;text-align: left;">
+                                                (unread)
+                                            </span>
+                                            <span class="text-success" *ngIf="message.dateRead && message.senderUsername !== username" style="float: left;text-align: left;">
+                                                (read {{message.dateRead | date: 'short'}})
+                                            </span>
+                                        </small> -->
+                                    </div>
+                                    <div class="col-lg-6" ></div>
+                                </div>
+                                <div class="row" *ngIf="message.senderUsername =='superadmin'" style="width: 100%;">
+                                    <div class="col-lg-6" ></div>
+                                    <div class="col-lg-6" >
+                                        <span  style="color: #204887;float: right;">
+                                            {{message.senderUsername}}
+                                        </span>
+                                        <br>
+                                        <p style="float: right;text-align: right;margin-bottom: 0px;" >{{message.content}}</p>
+                                        <small class="text-muted">
+                                            <!-- <span >{{message.messageSent | date: 'short'}}</span> -->
+                                            <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username" style="float: right;text-align: right;">
+                                                <img src="../../../assets/img/check1.png" title="unread">
+                                            </span>
+                                            <span class="text-success" *ngIf="message.dateRead && message.senderUsername !== username" style="float: right;text-align: right;">
+                                                <!-- (read {{message.dateRead | date: 'short'}}) -->
+                                                <img src="../../../assets/img/check.png" title="read">
+                                            </span>
+                                        </small>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            
+                <div class="card-footer">
+                    <form #messageForm="ngForm" (ngSubmit)="this.sendMessage()" autocomplete="off">
+                        <div class="input-group">
+                            <input 
+                                name="messageContent"
+                                [(ngModel)]="messageContent"
+                                type="text" 
+                                class="form-control input-sm" 
+                                placeholder="Send a message" 
+                                required
+                                />
+                            <div class="input-group-append">
+                                <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                </div>
+                <div class="col-lg-4">
+                    <div class="cart-totals">
+                        <button class="default-btn default-hot-toddy" (click)="back()" style="margin-bottom: 20px;">My messages</button>
+                    </div>
+                </div>
+                
+            </div> 
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    
+</div>
+
+
+

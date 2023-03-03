@@ -1,0 +1,25 @@
+<div class="listing-section-right">
+    <h3 class="title"> <i class="flaticon-filter"></i> Filters</h3>
+
+    <div class="listing-right-form">
+        <form>
+            <div class="form-group">
+                <i class='flaticon-filter'></i>
+                <select class="form-control form-select" (change)="getTypeNew($event)">
+                    <option>All Listing Type</option>
+                    <option *ngFor=" let nt of newtypelist" value="{{nt.newstypeid}}">{{nt.newstype1}}</option>
+                    
+                </select>	
+            </div>
+            <p-dropdown [options]="newtypelist" (onChange)="get()" [(ngModel)]="getnewtype" 
+            placeholder="All New Type " 
+            optionLabel="newstype1 "  [showClear]="true" [ngModelOptions]="{standalone: true}" [showClear]="true" [style]="{'width' :'307px'}"></p-dropdown>
+        </form>
+    </div>
+
+ 
+
+    <div class="col-lg-12 col-md-12 text-center">
+        <button type="submit" class="default-btn border-radius">Search Result <i class='bx bx-plus'></i></button>
+    </div>
+</div>

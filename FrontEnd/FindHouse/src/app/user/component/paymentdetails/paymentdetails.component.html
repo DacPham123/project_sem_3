@@ -1,0 +1,39 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Payment Details</h1>
+        </div><!-- /.col -->
+        
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="cart-wraps-area ptb-70">
+    <div class="container" *ngIf="invoice !=null">
+      
+            <div class="col-lg-12">
+                <div class="cart-totals">
+                    <h3>Invoice Infomation</h3>
+                    <ul>
+                        <li>Invoice Status: <span style="color: #2a2a2a ;" *ngIf="invoice.invoiceStatus==1">Buy News Package</span></li>
+                        <li>Invoice Status: <span style="color: #2a2a2a ;" *ngIf="invoice.invoiceStatus==2">Update Package</span></li>
+                        <li>Invoice Status: <span style="color: #2a2a2a ;" *ngIf="invoice.invoiceStatus==3">Used Package</span></li>
+                        <li>Package Name: <span style="color: #2a2a2a ;">{{invoice.packagetitle}}</span></li>
+                        <li>Description: <span style="color: #2a2a2a ;">{{invoice.packagecontent}}</span></li>
+                        <li>Payment Date:  <span style="color: #2a2a2a ;">{{invoice.paymentdate| date: "dd-MM-yyyy" }}</span></li>
+                        <li>Expire Date:  <span style="color: #2a2a2a ;">{{invoice.expiredate| date: "dd-MM-yyyy" }}</span></li>
+                        <li>Package Price:<span style="color: #2a2a2a ;">$ {{invoice.packageprice }}</span></li>
+                        <li>Vip News: <span style="color: #2a2a2a ;">{{invoice.noVvipnews}} news</span></li>
+                        <li>Special News: <span style="color: #2a2a2a ;">{{invoice.noVipnews}} news</span></li>
+                        <li>Ordinary News: <span style="color: #2a2a2a ;">{{invoice.noNormalnews}} news</span></li>
+                        <li>Payment Amount: <span style="color: #2a2a2a ;">${{invoice.price }}</span></li>
+                        <li>Paypal ID: <span style="color: #2a2a2a ;">${{invoice.paymentid }}</span></li>
+                    </ul>
+                    <a [routerLink]="['/privatesale/paymenthistory/']" ><button class="default-btn default-hot-toddy" style="margin-bottom: 20px;">Proceed To Checkout</button></a>
+                </div>
+            </div>
+            
+           
+   
+    </div>
+</section>

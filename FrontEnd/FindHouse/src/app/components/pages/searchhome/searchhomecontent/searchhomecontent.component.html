@@ -1,0 +1,109 @@
+<div class="listing-widget-section pt-100 pb-70">
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-4"> <div class="listing-section-right">
+                    <h3 class="title"> <i class="flaticon-filter"></i> Filters</h3>
+                
+                    <div class="listing-right-form">
+                        <form>
+                            <div class="form-group">
+                                <p-dropdown [options]="categorylist" [showClear]="true" [(ngModel)]="categoryid" 
+                                placeholder="All Status" 
+                                optionLabel="categoryname" optionValue="categoryid"  [ngModelOptions]="{standalone: true}" [showClear]="true" [style]="{'width' :'307px'}"></p-dropdown>
+                                </div>
+                                <div class="form-group">
+                                <p-dropdown [options]="catOfHouselist" [showClear]="true" [(ngModel)]="cateTofhouseid" 
+                                placeholder="All Category" 
+                                optionLabel="cateTofhousename" optionValue="cateTofhouseid"  [ngModelOptions]="{standalone: true}" [showClear]="true" [style]="{'width' :'307px'}"></p-dropdown>
+                                </div>
+                        <div class="form-group">
+                            <p-dropdown [options]="provincelist" (onChange)="sortCities()" [showClear]="true" [(ngModel)]="provinceId" 
+                            placeholder="All Province" 
+                            optionLabel="provinceName" optionValue="provinceId"  [ngModelOptions]="{standalone: true}" [showClear]="true" [style]="{'width' :'307px'}"></p-dropdown>
+                            </div>
+                            <div class="form-group" >
+                                <p-dropdown      [options]="citylist" (onChange)="sortWards()" [showClear]="true" [(ngModel)]="citiId" 
+                                placeholder="All City" 
+                                optionLabel="citiName" optionValue="citiId"  [ngModelOptions]="{standalone: true}" [style]="{'width' :'307px'}"></p-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <p-dropdown     [options]="wardlist" [(ngModel)]="wardId" 
+                                placeholder="All Ward" 
+                                optionLabel="wardName" optionValue="wardId"  [ngModelOptions]="{standalone: true}" [showClear]="true" [style]="{'width' :'307px'}"></p-dropdown>
+                            </div>
+                        </form>
+                    </div>
+                
+                    
+                
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <button type="submit" class="default-btn border-radius"   pRipple (click)="search()" >Search Result </button>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            
+                <div class="col-lg-8">  <div class="listing-widget-into">
+                    <div class="row" ><div class="listing-right-form">
+                        <div class="row">
+                            <div class="col-lg-9 col-sm-9"></div>
+                            <div class="col-lg-3 col-sm-3">
+                            <div class="form-group">
+                                <label >Total : {{totalitem}} items</label>
+                            </div>
+                        </div>
+                        </div>
+                    </div></div>
+                    <ng-container *ngIf="newsload.length >0">
+                        <div class="row" >
+                            <div class="col-lg-6 col-md-6" *ngFor=" let n of newsload">
+                                <div class="place-list-item">
+                                    <div class="images">
+                                        <a routerLink="/newsdetail/{{n.newsid}}" class="images-list"><img src="{{n.photo}}" style="height: 340px; width: 510px; object-fit: cover;" alt="Images"></a>
+                
+                                        <div class="place-profile">
+                                            <p-avatar image="{{n.userimg}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+
+                                            <h3>By, {{n.username}}</h3>
+                                        </div>
+                
+                                        <div class="place-status bg-dark-orange">
+                                            <a routerLink="/newsdetail/{{n.newsid}}"><h3>{{n.newTypeName}} New</h3></a>
+                                        </div>
+                
+                                        <div class="place-tag">
+                                            <span><a href="#">$$$ &nbsp; {{n.price}}</a></span>
+                                            <h3 class="title"><a routerLink="/newsdetail/{{n.newsid}}">{{n.category}}</a></h3>
+                                        </div>
+                                    </div>
+                
+                                    <div class="content">
+                                        <a routerLink="/newsdetail/{{n.newsid}}"><h3>{{n.title}}...</h3></a> 
+                                        <p><i class="flaticon-cursor"></i> {{n.province}},&nbsp;{{n.city}},&nbsp;{{n.ward}}</p>                       
+                                    </div>
+                                </div>                
+                            </div>
+                
+                        </div>
+                        <div class="col-lg-12 text-center"> 
+                            <!-- <p>{{coutshowitem}}/{{totalitem}}</p> -->
+                            <button type="submit" class="default-btn border-radius" pRipple (click)="loadmore()">Load More <i class='bx bx-plus'></i></button>
+                        </div>
+                    </ng-container>
+            
+                    <ng-container *ngIf="newsload.length == 0">
+                        <p-messages severity="warn">
+                            <ng-template pTemplate>
+                                <img src="assets/img/logo/logo1.png" width="32" />
+                                <div class="ml-2"> &nbsp;&nbsp;  Sorry.... No Infomation !!!!</div>
+                            </ng-template>
+                        </p-messages>
+                    </ng-container>
+                </div>
+            </div>
+            
+        </div>   
+    </div>
+</div>
+<p-toast ></p-toast>

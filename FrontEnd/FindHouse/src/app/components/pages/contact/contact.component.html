@@ -1,0 +1,138 @@
+<navbar></navbar>
+
+<div class="inner-banner inner-bg1">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>Contact Us</h3>
+            <ul>
+                <li><a routerLink="/home">Home</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li>Pages</li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li>Contact Us</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="contact-area">
+    <div class="container">
+        <div class="contact-max">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card">
+                        <i class="flaticon-position"></i>
+                        <h3>35/6 D5, 25 Ward, Binh Thach Distric</h3>
+                        <h3>Ho Chi Minh City, Viet Nam.</h3>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card">
+                        <i class="flaticon-email"></i>
+                        <h3><a href="dongthithanhxuan.hn@gmail.com">Email:dongthithanhxuan.hn@gmail.com</a></h3>
+                        <h3><a href="nguyenlan3105@gmail.com">Email:nguyenlan3105@gmail.com</a></h3>
+                        <h3><a href="dacvn5672@gmail.com">Email:dacvn5672@gmail.com</a></h3>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+                    <div class="contact-card">
+                        <i class="flaticon-to-do-list"></i>
+                        <h3><a href="tel:+(84)–904859325">+(84) –904 859 325</a></h3>
+                        <h3><a href="tel:+(84)-774911853">+(84) –774 911 853</a></h3>
+                        <h3><a href="tel:+(84)-703901941">+(84) –703 901 941</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact-map">
+    <div class="container-fluid m-0 p-0">
+
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0611126813433!2d106.7100772141167!3d10.806631461592103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a330e608a5%3A0x4cc00c5927dcb361!2zMzUsIDYgxJDGsOG7nW5nIEQ1LCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCA3MjMwOCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1652433223334!5m2!1svi!2s"></iframe>
+        <div class="contact-wrap">
+            <div class="contact-form">
+                <span>SEND MESSAGE</span>
+                <h2>Contact With Us</h2>
+
+                <form id="contactForm" [formGroup]="addContactForm" (ngSubmit)="addContact()" >
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <i class='bx bx-user'></i>
+                                <input type="text" name="name" id="name" class="form-control" required
+                                    placeholder="Your Name*" formControlName="name">
+                                <div class="col-lg-12"
+                                    style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                                    {{errorFullname}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <i class='bx bx-user'></i>
+                                <input type="email" name="email" id="email" class="form-control" required
+                                    placeholder="E-mail*" formControlName="email">
+                                <div class="col-lg-12"
+                                    style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                                    {{errorEmail}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <i class='bx bx-phone'></i>
+                                <input type="text" name="phone_number" id="phone_number" required class="form-control"
+                                    placeholder="Your Phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" formControlName="phone">
+                                <div class="col-lg-12"
+                                    style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                                    {{errorPhone}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <i class='bx bx-file'></i>
+                                <input type="text" name="msg_subject" id="msg_subject" class="form-control" required
+                                    placeholder="Your Subject" formControlName="subject">
+                                <div class="col-lg-12"
+                                    style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                                    {{errorSubject}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <i class='bx bx-envelope'></i>
+                                <textarea name="message" class="form-control" id="message" cols="30" rows="8" required
+                                    placeholder="Your Message" formControlName="message"></textarea>
+                                <div class="col-lg-12"
+                                    style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                                    {{errorMessage}}</div>
+                            </div>
+                        </div>
+                        <p-dialog header="Header" [(visible)]="displayModal" [modal]="true"
+                        [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                        <p class="m-0">{{dialogTitle}}</p>
+                        <ng-template pTemplate="footer">
+                            <p-button icon="pi pi-check" 
+                                label="Ok" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                        </p-dialog>
+                        <div class="col-lg-12 col-md-12">
+                            <button type="submit" class="default-btn border-radius">Send Message <i
+                                    class='bx bx-plus'></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer-style-two></app-footer-style-two>

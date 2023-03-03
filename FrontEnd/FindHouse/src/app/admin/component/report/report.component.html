@@ -1,0 +1,136 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Notification</h1>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<div class="card">
+  <p-table #dt [value]="listtshow" [(selection)]="list" dataKey="id" styleClass="p-datatable-customers"
+    [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+    responsiveLayout="scroll" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+    [globalFilterFields]="['reportid','newsid','touser','politicsreason','countcheatreason','reportstatus']">
+
+
+    <ng-template pTemplate="header">
+      <tr>
+
+        <th pSortableColumn="newsid">
+          <div class="flex justify-content-between align-items-center">
+            News Id <br>
+            <p-sortIcon field="newsid"></p-sortIcon>
+            <p-columnFilter type="text" field="newsid" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="touser">
+          <div class="flex justify-content-between align-items-center">
+            Create By <br>
+            <p-sortIcon field="touser"></p-sortIcon>
+            <p-columnFilter type="text" field="touser" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="countcheatreason">
+          <div class="flex justify-content-between align-items-center">
+            Reason <br>
+            <p-sortIcon field="countcheatreason"></p-sortIcon>
+            <p-columnFilter type="text" field="countcheatreason" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+
+        <th pSortableColumn="countcheatreason">
+          <div class="flex justify-content-between align-items-center">
+            ToTal Report <br>
+            <p-sortIcon field="countcheatreason"></p-sortIcon>
+            <p-columnFilter type="text" field="countcheatreason" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="reportstatus">
+          <div class="flex justify-content-between align-items-center">
+            Status<br>
+            <p-sortIcon field="reportstatus"></p-sortIcon>
+            <p-columnFilter type="text" field="reportstatus" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+
+        <th style="width: 8rem">Show</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+      <tr class="p-selectable-row">
+
+        <td>
+          <span class="p-column-title">News Id</span>
+          <span class="image-text">NewsNo{{customer.newsid}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Create By</span>
+          <span class="image-text">{{customer.touser}}</span>
+        </td>
+        <td *ngIf=" customer.cheatreason ==0">
+          <span class="p-column-title">Reason</span>
+          <span class="image-text">Politics</span>
+        </td>
+        <td *ngIf=" customer.cheatreason >0">
+          <span class="p-column-title">Reason</span>
+          <span class="image-text">Cheat</span>
+        </td>
+        <td *ngIf=" customer.cheatreason ==0">
+          <span class="p-column-title">ToTal Report</span>
+          <span class="image-text">{{customer.politicsreason}}</span>
+        </td>
+        <td *ngIf=" customer.cheatreason >0">
+          <span class="p-column-title">ToTal Report</span>
+          <span class="image-text">{{customer.cheatreason}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Status</span>
+          <span class="image-text" *ngIf="customer.reportstatus==1" style="background-color: #ffcdd2;color: #c63737;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Lock By SuperAdmin</span>
+          <span class="image-text" *ngIf="customer.reportstatus==3 && customer.politicsreason<10" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Warning news</span>
+          <span class="image-text" *ngIf="customer.reportstatus==3 && customer.politicsreason>=10" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+                padding: 0.25em 0.5rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: .3px;">Warning SUPERADMIN CHECK</span>
+          <span class="image-text" *ngIf="customer.reportstatus==4" style="background-color: #eccfff;color: #694382;box-sizing: border-box;border-radius: 2px;
+                padding: 0.25em 0.5rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: .3px;">Lock By System</span>
+        </td>
+        <td style="text-align: center">
+          <button pButton pRipple type="button" icon="pi pi-comment" class="p-button-rounded p-button-text"
+            title="Show warning" (click)="showInfo(customer.reportid)"></button>
+          <a [routerLink]="['/admin/shownewsdeatils/',{newsid: customer.newsid}]"><button pButton pRipple type="button"
+              icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show Info"></button></a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No List News found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+<p-dialog header="Report From Customer" [(visible)]="display" [style]="{width: '300px'}">
+  <p style="color:red ;"> {{msg}}</p>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="display=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

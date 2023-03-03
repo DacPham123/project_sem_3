@@ -1,0 +1,191 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Agent Infomation</h1>
+
+          
+
+        </div><!-- /.col -->
+        
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section class="testimonial-area-three " style="background-image:none">
+    <div class="container">
+        
+        <div class="row ">
+
+            <div class="col-lg-12" >
+            
+                    
+                <div class="testimonial-item testimonial-item-bg2">
+                        <h3>{{account.fullname}}</h3>               
+                        <div class="row ">   
+                            <div class="col-lg-12" >                            
+                                Address: {{account.addresss}}   
+                            </div>                          
+                        </div>
+                        <div class="row ">   
+                            <div class="col-lg-6" >                          
+                            Email: {{account.email}}     
+                            </div>                       
+                        
+                            <div class="col-lg-6" >                          
+                            Phone: {{account.phone}}     
+                            </div>                       
+                        </div>
+                    <div class="testimonial-top"><img src="{{account.photo}}" alt="Images" style="border-radius: 50%; width:115px;height:115px;margin-left: 30px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-area-three " style="background-image:none">
+    <div class="container">
+        <div class="section-title text-center">
+            <h3>List News By Agent</h3><br>
+        </div>
+    </div>
+</section>
+<div class="card">
+    <p-table #dt [value]="customers" [(selection)]="selectedCustomers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['newsid','title','username','createdate','newstatus','newTypeName']">
+  
+    <ng-template pTemplate="header">
+        <tr>
+        
+            <th pSortableColumn="newsid">
+                <div class="flex justify-content-between align-items-center">
+                    NewsId<br>
+                    <p-sortIcon field="newsid"></p-sortIcon>
+                    <p-columnFilter type="text" field="newsid" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="title">
+                <div class="flex justify-content-between align-items-center">
+                    Title <br>
+                    <p-sortIcon field="title"></p-sortIcon>
+                    <p-columnFilter type="text" field="title" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+
+           
+            <th pSortableColumn="createdate">
+                <div class="flex justify-content-between align-items-center">
+                    Created Date <br>
+                    <p-sortIcon field="createdate"></p-sortIcon>
+                    <p-columnFilter type="date" field="createdate" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+         
+            <th pSortableColumn="newstatus">
+                <div class="flex justify-content-between align-items-center">
+                    Status<br>
+                    <p-sortIcon field="newstatus"></p-sortIcon>
+                    <p-columnFilter type="text" field="newstatus" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="newTypeName">
+                <div class="flex justify-content-between align-items-center">
+                    News Type<br>
+                    <p-sortIcon field="newTypeName"></p-sortIcon>
+                    <p-columnFilter type="text" field="newTypeName" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th style="width: 8rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+        <tr class="p-selectable-row">
+            <td>
+                <span class="p-column-title">newsid</span>
+                {{customer.newsid}}
+            </td>
+            <td>
+                <span class="p-column-title">title</span>
+                <span class="image-text">{{customer.title}}...</span>
+            </td>
+     
+            <td>
+                <span class="p-column-title">Created</span>
+                {{customer.createdate | date: 'dd/MM/yyyy'}}
+            </td>
+          
+            <td >
+                <span class="p-column-title">status</span>
+                <span class="image-text" *ngIf="customer.newstatus==0" style="background-color: #b3e5fc;color: #23547b;box-sizing: border-box;border-radius: 2px;
+                padding: 0.25em 0.5rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: .3px;">Waiting Accept</span>
+                <span class="image-text" *ngIf="customer.newstatus==1" style="background-color: #c8e6c9;color: #256029;box-sizing: border-box;border-radius: 2px;
+                padding: 0.25em 0.5rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: .3px;">On Pages</span>
+                <span class="image-text" *ngIf="customer.newstatus==2" style="background-color: #eccfff;color: #694382;box-sizing: border-box;border-radius: 2px;
+                padding: 0.25em 0.5rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: .3px;">Reject By You</span>
+                <span class="image-text" *ngIf="customer.newstatus==3" style="background-color: #ffcdd2;color: #c63737;box-sizing: border-box;border-radius: 2px;
+                padding: 0.25em 0.5rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: .3px;">Reject By SuperAdmin</span>
+                <span class="image-text" *ngIf="customer.newstatus==4" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+                padding: 0.25em 0.5rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 12px;
+                letter-spacing: .3px;">Expired</span>
+                 <span class="image-text" *ngIf="customer.newstatus==5" style="background-color: #c8e6c9;color: #256029;box-sizing: border-box;border-radius: 2px;
+                 padding: 0.25em 0.5rem;
+                 text-transform: uppercase;
+                 font-weight: 700;
+                 font-size: 12px;
+                 letter-spacing: .3px;">Disable</span>
+            </td>
+            <td *ngIf="customer.newstypeid ==null">
+                <span class="p-column-title">News Type</span>
+                <img [alt]="customer.newstypeid" src="../../../../assets/img/products/waiting.png" width="32" style="vertical-align: middle" /> &nbsp;
+                <span class="image-text">Not Set </span>
+            </td>
+            <td *ngIf="customer.newstypeid ==1">
+                <span class="p-column-title">News Type</span>
+                <img [alt]="customer.newstypeid" src="../../../../assets/img/products/vip.png" width="32" style="vertical-align: middle" />&nbsp;
+                <span class="image-text">Vip News</span>
+            </td>
+            <td *ngIf="customer.newstypeid ==2">
+                <span class="p-column-title">News Type</span>
+                <img [alt]="customer.newstypeid" src="../../../../assets/img/products/star.png" width="32" style="vertical-align: middle" />&nbsp;
+                <span class="image-text">Special News</span>
+            </td>
+            <td *ngIf="customer.newstypeid ==3">
+                <span class="p-column-title">News Type</span>
+                <img [alt]="customer.newstypeid" src="../../../../assets/img/products/star1.png" width="32" style="vertical-align: middle" />&nbsp;
+                <span class="image-text">Ordinary News</span>
+            </td>
+            <td style="text-align: center">
+                <a [routerLink]="['/admin/shownewsdeatils/',{newsid: customer.newsid}]" ><button pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show Info"></button></a>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No List News found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+</div>

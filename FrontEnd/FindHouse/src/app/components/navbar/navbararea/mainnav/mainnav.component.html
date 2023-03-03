@@ -1,0 +1,382 @@
+<!-- <div class="main-nav">
+    <div class="container-fluid">
+        <nav class="container-max navbar navbar-expand-md navbar-light ">
+            <a class="navbar-brand" routerLink="/home"><img src="assets/img/logo/logo1.png" alt="Logo"></a>
+
+            <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link"  routerLink="/home">Home </a>
+                       
+                    </li>
+
+                    <li class="nav-item"><a routerLink="/about" class="nav-link" routerLinkActive="active">About</a></li>
+
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" >Category Of House<i class='bx bx-plus'></i></a>
+
+                        <ul class="dropdown-menu" >
+                            <ng-container *ngIf="catehouse!= null">
+                            <li class="nav-item"><a *ngFor="let cth of catehouse" routerLink="/categoryofhouse/{{cth.cateTofhouseid}}" class="nav-link" routerLinkActive="active">{{cth.cateTofhousename}}</a></li>                           
+                        </ng-container>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" >New Type<i class='bx bx-plus'></i></a>
+
+                        <ul class="dropdown-menu" >
+                            <li class="nav-item"><a *ngFor="let nt of newtype" routerLink="/newtype/{{nt.newstypeid}}" class="nav-link" routerLinkActive="active">{{nt.newstype1}} New</a></li>                           
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" >Category<i class='bx bx-plus'></i></a>
+
+                        <ul class="dropdown-menu" >
+                            <li class="nav-item"><a *ngFor="let nt of category" routerLink="/category/{{nt.categoryid}}" class="nav-link" routerLinkActive="active">For {{nt.categoryname}} </a></li>                           
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a routerLink="/contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a routerLink="/messages" class="nav-link">Messages</a></li>
+                </ul>
+
+               
+                <div class="side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'superadmin'  ">                   
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div>
+
+                    <div class="side-item" >
+                        <div class="user-btn"  style="top:-5px">
+                            <a routerLink="/superadmin" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div>
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'admin'">                   
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div>
+
+                    <div class="side-item" >
+                        <div class="user-btn"  style="top:-5px">
+                            <a routerLink="/admin" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div>
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'privateseller'">                   
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div>
+
+                    <div class="side-item" >
+                        <div class="user-btn"  style="top:-5px">
+                            <a routerLink="/privatesale" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div>
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'agent'">                   
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div>
+
+                    <div class="side-item" >
+                        <div class="user-btn"  style="top:-5px">
+                            <a routerLink="/agent" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div>
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'visitor'">                   
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div>
+
+                    <div class="side-item" >
+                        <div class="user-btn"  style="top:-5px">
+                            <a routerLink="/visitor" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div>
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="side-nav d-in-line align-items-center" *ngIf="username ==null">
+                    
+
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div>
+
+                    <div class="side-item"  >
+
+                        <div class="user-btn" > 
+                            <a routerLink="/login"  ><i class="flaticon-contact"></i></a>                
+                        </div>
+
+                    </div>
+                   
+                </div>
+
+            </div>
+        </nav>
+    </div>
+</div> -->
+<div class="main-nav">
+    <div class="container-fluid">
+        <nav class="container-max navbar navbar-expand-md navbar-light ">
+            <a class="navbar-brand" routerLink="/home"><img src="assets/img/logo/logo1.png" alt="Logo"></a>
+
+            <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link"  routerLink="/home">Home </a>
+                       
+                    </li>
+
+                    <li class="nav-item"><a routerLink="/about" class="nav-link" routerLinkActive="active">About</a></li>
+
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" >Category Of House<i class='bx bx-plus'></i></a>
+
+                        <ul class="dropdown-menu" >
+                            <ng-container *ngIf="catehouse!= null">
+                            <li class="nav-item"><a *ngFor="let cth of catehouse" routerLink="/categoryofhouse/{{cth.cateTofhouseid}}" class="nav-link" routerLinkActive="active">{{cth.cateTofhousename}}</a></li>                           
+                        </ng-container>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" >New Type<i class='bx bx-plus'></i></a>
+
+                        <ul class="dropdown-menu" >
+                            <li class="nav-item"><a *ngFor="let nt of newtype" routerLink="/newtype/{{nt.newstypeid}}" class="nav-link" routerLinkActive="active">{{nt.newstype1}} New</a></li>                           
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" >Category<i class='bx bx-plus'></i></a>
+
+                        <ul class="dropdown-menu" >
+                            <li class="nav-item"><a *ngFor="let nt of category" routerLink="/category/{{nt.categoryid}}" class="nav-link" routerLinkActive="active">For {{nt.categoryname}} </a></li>                           
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a routerLink="/contact" class="nav-link">Contact</a></li>
+                   
+                </ul>
+
+               
+                <div class="row side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'superadmin'  ">
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                        <div class="side-item">
+                            <div class="search-box">
+                                <i class="flaticon-loupe"></i>
+                            </div>
+                        </div>
+                    </div>                   
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;"> <div class="side-item" >
+                        <div class="user-btn"  >
+                            <a routerLink="/superadmin" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                        <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                   
+                    
+                </div>
+
+                <div class="row side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'admin'">     
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">              
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item" >
+                        <div class="user-btn"  >
+                            <a routerLink="/admin" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                        <div class="side-item">
+                            <div class="search-box">
+                                <a routerLink="/messages"  > <i class="pi pi-comment "></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div></div>
+                </div>
+
+                <div class=" row side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'privateseller'">        
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">           
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item" >
+                        <div class="user-btn"  >
+                            <a routerLink="/privatesale" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                        <div class="side-item">
+                            <div class="search-box">
+                                <a routerLink="/messages"  > <i class="pi pi-comment "></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="row side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'agent'">     
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">              
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item" >
+                        <div class="user-btn"  >
+                            <a routerLink="/agent" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                        <div class="side-item">
+                            <div class="search-box">
+                                <a routerLink="/messages"  > <i class="pi pi-comment "></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="row side-nav d-in-line align-items-center" *ngIf="username !=null && checkRole == 'visitor'">     
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">              
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item" >
+                        <div class="user-btn"  >
+                            <a routerLink="/visitor" >
+                                <p-avatar image="{{accphoto}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                            </a>                         
+                        </div>
+                    </div></div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                        <div class="side-item">
+                            <div class="search-box">
+                                <a routerLink="/messages"  > <i class="pi pi-comment "></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+                    <div class="side-item">
+                        <div class="search-box">
+                            <a routerLink="/logout"  > <i class="pi pi-sign-out "></i></a>
+                        </div>
+                    </div></div>
+                </div>
+                
+                <div class="row side-nav d-in-line align-items-center" *ngIf="username ==null">
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 2px;">
+
+                    <div class="side-item">
+                        <div class="search-box">
+                            <i class="flaticon-loupe"></i>
+                        </div>
+                    </div>
+                </div>
+                    <div class ="col-lg-2" style="margin-top:3px ;margin-left: 20px;">
+                    <div class="side-item"  >
+
+                        <div class="user-btn" > 
+                            <a routerLink="/login"  ><i class="flaticon-contact"></i></a>                
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+</div>

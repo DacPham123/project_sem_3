@@ -1,0 +1,162 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Buy Ad Packs</h1>
+        </div><!-- /.col -->
+       
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section class="cart-wraps-area " *ngIf="showmypackage == true">
+  <div class="container" >
+      <div class="col-lg-12">
+        <div class="cart-totals">
+            <h3>My Package</h3>
+            <ul>
+                <li>Package Name: <span>{{myinvoice.packagetitle}}</span></li>
+                <li>Description: <span>{{myinvoice.packagecontent}}</span></li>
+                <li>Expire Date: <span>{{myinvoice.expire}}</span></li>
+  
+                
+              
+            </ul>
+            <div class="cart-wraps">
+              <div class="cart-table table-responsive">
+                  <table class="table table-bordered" style="border-color: #ffc0a7;">
+                      <thead style="border-top: 1px solid #ffc0a7;">
+                          <tr>
+                              <th scope="col">&nbsp;&nbsp;&nbsp;</th>
+                              <th scope="col">No</th>
+                              <th scope="col">News Type</th>
+                              <th scope="col">Quantity on Package</th>
+                              <th scope="col">Quantity news has set</th>
+                            
+                          </tr>
+                      </thead>
+                      <tbody style="border-top: 2px solid #ffc0a7;">
+                          <tr>
+                            <td class="product-thumbnail">
+                              &nbsp;&nbsp;&nbsp;
+                          </td>
+                              <td class="product-thumbnail">
+                                  1
+                              </td>
+                              <td class="product-name">
+                                  Vip News
+                              </td>
+                              <td class="product-quantity">
+                                  <span class="unit-amount">{{myinvoice.noVvipnews}}</span>
+                              </td>
+                              <td class="product-quantity">    
+                                {{countvvip}}                     
+                              </td>
+                          </tr>
+                          <tr>
+                            <td class="product-thumbnail">
+                              &nbsp;&nbsp;&nbsp;
+                          </td>
+                              <td class="product-thumbnail">
+                                  2
+                              </td>
+                              <td class="product-name">
+                                  Special News
+                              </td>
+                              <td class="product-quantity">
+                                  <span class="unit-amount">{{myinvoice.noVipnews}}</span>
+                              </td>
+                              <td class="product-quantity">    
+                                {{countspecial}}                     
+                              </td>
+                          </tr>
+                          <tr>
+                            <td class="product-thumbnail">
+                              &nbsp;&nbsp;&nbsp;
+                          </td>
+                              <td class="product-thumbnail">
+                                  3
+                              </td>
+                              <td class="product-name">
+                                Ordinary News
+                              </td>
+                              <td class="product-quantity">
+                                  <span class="unit-amount">{{myinvoice.noNormalnews}}</span>
+                              </td>
+                              <td class="product-quantity">    
+                                {{countordinary}}                     
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+        
+              <div class="cart-buttons">
+                  <div class="row align-items-center">
+                    <div class="col-lg-7 col-sm-7 col-md-7 text-end">
+                    
+                  </div  >
+                      <div class="col-lg-5 col-sm-5 col-md-5 text-end" *ngIf="count>0">
+                          <button (click)="updatemypakage()" class=" default-btn">Update My Package</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+<section class="pricing-area ptb-100 pb-70" *ngIf="showmypackage == false">
+    <div class="container" >
+        <div class="section-title text-center">
+ 
+            <h5>You don't have any ad packs in your account</h5>
+        </div>
+        <div class="col-lg-12">
+          <div class="cart-totals">
+            <div class="cart-buttons">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-sm-4 col-md-4 text-end">
+                    </div>
+                    <div class="col-lg-4  col-sm-4 col-md-4" style="text-align: center;">
+                        <button (click)="listpackages()" class=" default-btn" > Buy Package</button>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 text-end">
+                    </div>
+                </div>
+            </div>             
+          </div>
+      </div>
+    </div>
+  </section>
+<section class="pricing-area ptb-100 pb-70" *ngIf="showlistpackage==true" style="padding-top: 20 ;">
+  <div class="container">
+      <div class="section-title text-center">
+          <span>Package</span>
+          <h2>Our Package Tables</h2>
+      </div>
+
+      <div class="row pt-45" >
+          <div class="col-lg-4 col-md-6" *ngFor="let p of listpackage">
+              <div class="price-card">
+                  <div class="content">
+                      <i  *ngIf="p.packagetitle.includes('Company')"   class="flaticon-deal"></i>
+                      <i  *ngIf="p.packagetitle.includes('Vip')"   class="flaticon-diamond"></i>
+                      <i  *ngIf="!p.packagetitle.includes('Vip') && !p.packagetitle.includes('Company') "   class="flaticon-megaphone"></i>
+                      <h3>{{p.packagetitle}}</h3>
+                      <h2><sup>$</sup>{{p.packageprice}}</h2>
+             
+                  </div>
+                  <ul>
+                      <li>{{p.packagedate}} Days</li>
+                      <li>{{p.noVVipnews}} Vip News</li>
+                      <li>{{p.noVipnews}} Special News</li>
+                      <li>{{p.noNormalnews}} Ordinary News</li>
+                  </ul>
+                  <a [routerLink]="['/cart/',{packageid: p.packageId}]" class=" default-btn border-radius">Choose Professional <i class='bx bx-plus'></i></a>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+    <section class="place-list-two pb-70">
+        <div class="container">
+            <!-- <div class="section-title">
+                <span>Discover Popular Properties</span>
+                <h2>Featured  <b>Properties</b></h2>
+                <p>These are our featured properties</p>
+            </div> -->
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-6">
+                    <div class="section-title mb-45">
+                        <span>Discover Popular Properties</span>
+                        <h2>Featured <b>Properties</b></h2>
+                        <p>These are our featured properties</p>
+                    </div>
+                </div>
+    
+                <div class="col-lg-5 col-md-6">
+                    <div class="place-btn">
+                        <a routerLink="/newtype/1" class="default-btn">Check out all places <i class='bx bx-plus'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+         
+            <p-carousel [value]="vipNews" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                <ng-template let-news pTemplate="item">
+                    <div class="place-list-item" style="width: 510px;">
+                        <div class="images">
+                            <a routerLink="/newsdetail/{{news.newsid}}" class="images-list"><img src="{{news.photo}}" style="height: 340px; width: 510px; object-fit: cover;" alt="Images"></a>
+                            <div class="place-profile">
+                                <img src="{{news.userimg}}" alt="Images">
+                                <h3>By, {{news.username}}</h3>
+                            </div>
+        
+                            <div class="place-status bg-dark-orange">
+                                <a routerLink="/newsdetail/{{news.newsid}}"><h3>For {{news.category}}</h3></a>
+                            </div>
+        
+                            <div class="place-tag">
+                                <span><a routerLink="/">$ {{news.price}}</a></span>
+                                <h3 class="title"><a routerLink="/listing-details">{{news.cateTofhouse}}</a></h3>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <a routerLink="/listing-details"><h3>{{news.title}}...</h3></a> 
+                            <p><i class="flaticon-cursor"></i>{{news.province}}, {{news.city}}</p>
+                            <ul class="place-rating">
+                                <li><a routerLink="/">4.9</a></li>
+                                <li>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star icon-color'></i>
+                                    <i class='bx bxs-star icon-color'></i>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <div class="product-item-content">
+                            <div class="mb-3">
+                                <img src="{{news.photo}}" [alt]="news.photo" class="product-image" style="height: 340px; width: 510px; object-fit: cover;" />
+                            </div>
+                            <div>
+                                <h4 class="mb-1">{{news.title}}...</h4>
+                                <h6 class="mt-0 mb-3">${{news.price}}</h6>
+                                <span [class]="'product-badge status-'+news.cateTofhouse.toLowerCase()">{{news.cateTofhouse}}</span>
+                                <div class="car-buttons mt-5">
+                                    <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                                    <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
+                                    <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </ng-template>
+            </p-carousel>
+
+        </div>
+    </section>
+

@@ -1,0 +1,113 @@
+
+        <div class="card">
+          <p-table #dt [value]="listnews" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first" 
+          responsiveLayout="scroll" [rowHover]="true" dataKey="newsid" styleClass="p-datatable-listnews"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+              [filterDelay]="0" [globalFilterFields]="['title','categoryname','cateTofhouse','provincename', 'newTypeName']">
+              <ng-template pTemplate="caption">
+                <div class="table-header">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <h4>List of News</h4>
+                    </div>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                    </span>
+                    </div>
+                  </div>
+                </div>
+            </ng-template>
+              <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="newsid">
+                      <div class="flex justify-content-between align-items-center">
+                        News Id 
+                        <p-sortIcon field="newsid"></p-sortIcon>
+                      </div>
+                    </th>
+
+                      <th pSortableColumn="title">                       
+                          Title <p-sortIcon field="title"></p-sortIcon>                         
+                      </th>
+
+                      <th pSortableColumn="createdate">
+                          Created date <p-sortIcon field="createdate"></p-sortIcon>                                                              
+                      </th>
+
+                      <th pSortableColumn="categoryname">Category<p-sortIcon field="categoryname"></p-sortIcon></th>
+                      <th pSortableColumn="cateTofhouse">Category of house<p-sortIcon field="cateTofhouse"></p-sortIcon></th>
+                      <th pSortableColumn="provincename">Province<p-sortIcon field="provincename"></p-sortIcon></th>
+                      <th pSortableColumn="newstatus">Status<p-sortIcon field="newstatus"></p-sortIcon></th>
+                      <th pSortableColumn="newTypeName">News Type<p-sortIcon field="newstatus"></p-sortIcon></th>
+                      <th>Update news</th>
+                      <th>Set Ad</th>
+                  </tr>
+              </ng-template>
+              
+              <ng-template pTemplate="body" let-new>
+                  <tr>
+                      <td>{{new.newsid}}</td>
+                      <td>{{new.title}}...</td>
+                      <td>{{new.createdate | date: 'dd/MM/yyyy'}}</td>
+                      <td>{{new.categoryname}}</td>
+                      <td>{{new.cateTofhouse}}</td>
+                      <td>{{new.provincename}}</td>                    
+                      <td>
+                        <span class="p-column-title">status</span>  
+                        <span class="image-text" *ngIf="new.newstatus==0" style="background-color: #b3e5fc;color: #23547b;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">Waiting set</span>         
+                        <span class="image-text" *ngIf="new.newstatus==1" style="background-color: #c8e6c9;color: #256029;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">On Pages</span>                       
+                        <span class="image-text" *ngIf="new.newstatus==3" style="background-color: #ffcdd2;color: #c63737;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">Reject By SuperAdmin</span>
+                        <span class="image-text" *ngIf="new.newstatus==4" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">Expired</span>
+                         <span class="image-text" *ngIf="new.newstatus==5" style="background-color: #e88c8c;color: #66190d;box-sizing: border-box;border-radius: 2px;
+                         padding: 0.25em 0.5rem;
+                         text-transform: uppercase;
+                         font-weight: 700;
+                         font-size: 12px;
+                         letter-spacing: .3px;">Disable</span>
+                      </td>
+                      <td>
+                        <span class="p-column-title">newstype</span> 
+                        <span class="p-column-title">newstype</span> 
+                        <div *ngIf="new.newstypeid==null" style="color: #1a0dac; font-weight: 700; font-size: medium;"><img src="assets/img/products/loading-seller.png"/>Waiting set Ad</div>
+                        <div *ngIf="new.newstypeid==1" style="color: #e7e431; font-weight: 700; font-size: medium;"><img src="assets/img/products/vip-seller.png"/>{{new.newTypeName}}</div>
+                        <span class="p-column-title">newstype</span> 
+                        <div *ngIf="new.newstypeid==2" style="color: #de8c3a; font-weight: 700; font-size: medium;"><img src="assets/img/products/special-seller.png"/>{{new.newTypeName}}</div>
+                        <span class="p-column-title">newstype</span> 
+                        <div *ngIf="new.newstypeid==3" style="color: #117799; font-weight: 700; font-size: medium;"><img src="assets/img/products/ordinary-seller.png"/>{{new.newTypeName}}</div>                                         
+                      </td>
+                      <td>
+                        <button [routerLink]="['/privatesale/myproperties/detail', {id: new.newsid}]" pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" tooltipPosition="top" pTooltip="Content"></button>
+                        <button [routerLink]="['/privatesale/myproperties/newsimg', {id: new.newsid}]" pButton pRipple type="button" icon="pi pi-image" class="p-button-rounded p-button-text" tooltipPosition="top" pTooltip="Images"></button>
+                      </td>
+                      <td>
+                        <button [routerLink]="['/privatesale/myproperties/review', {id: new.newsid}]" pButton pRipple type="button" icon="pi pi-arrow-up-right" class="p-button-rounded p-button-text"></button>                                     
+                      </td>
+                  </tr>
+              </ng-template>
+          </p-table>
+          <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+      </div>
+      <p-toast></p-toast>

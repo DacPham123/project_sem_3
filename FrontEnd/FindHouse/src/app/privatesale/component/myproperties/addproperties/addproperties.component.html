@@ -1,0 +1,299 @@
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 ">
+                    <!-- general form elements -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title"><strong>ADD NEWS</strong></h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <p-toast></p-toast>
+                        <form [formGroup]="addNews" (ngSubmit)="save()">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                          <ng-container *ngIf="!errorTitle">
+                                              <input type="text" class="form-control" id="title" placeholder="Enter title" aria-describedby="title-help" pInputText
+                                              style="width: 100%; text-transform:uppercase" formControlName="title" >
+                                          </ng-container>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                          <ng-container *ngIf="errorTitle">
+                                              <input type="text" class="form-control" id="title" placeholder="Enter title" aria-describedby="title-help" class="ng-invalid ng-dirty" pInputText
+                                              style="width: 100%; text-transform:uppercase" formControlName="title">
+                                          </ng-container>   
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                          <small id="title-help" class="p-error">{{errorTitle}}</small>
+                                      </div>
+                                    </div>
+                                      
+                                        
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <p-dropdown [options]="provincelist" (onChange)="sortCities()"
+                                                    [showClear]="true" [(ngModel)]="provinceId" formControlName="provinceId"
+                                                    placeholder="Select a Province" optionLabel="provinceName"
+                                                    optionValue="provinceId" [showClear]="true"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <p-dropdown [options]="citylist" (onChange)="sortWards()" [showClear]="true"
+                                                    [(ngModel)]="citiId" formControlName="citiId"
+                                                    placeholder="Select a City" optionLabel="citiName" optionValue="citiId"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <ng-container *ngIf="!errorAddress">
+                                                    <p-dropdown [options]="wardlist" [(ngModel)]="wardid" aria-describedby="ward-help"
+                                                    formControlName="wardid" placeholder="Select a Ward"
+                                                    optionLabel="wardName" optionValue="wardId" [showClear]="true"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                                </ng-container>
+                                                <ng-container *ngIf="errorAddress">
+                                                    <p-dropdown [options]="wardlist" [(ngModel)]="wardid" aria-describedby="ward-help"
+                                                    formControlName="wardid" placeholder="Select a Ward"
+                                                    optionLabel="wardName" optionValue="wardId" [showClear]="true" class="ng-invalid ng-dirty"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                                </ng-container>
+                                                <small id="ward-help" class="p-error">{{errorAddress}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+    
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="status">Property Status</label>
+                                                <ng-container *ngIf="!errorStatus">
+                                                    <p-dropdown [options]="catlist" [showClear]="true" aria-describedby="status-help"
+                                                    formControlName="categoryid" placeholder="Propery Status"
+                                                    optionLabel="categoryname" optionValue="categoryid" [showClear]="true"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                                </ng-container>
+                                                <ng-container *ngIf="errorStatus">
+                                                    <p-dropdown [options]="catlist" [showClear]="true" aria-describedby="status-help"
+                                                    formControlName="categoryid" placeholder="Propery Status"
+                                                    optionLabel="categoryname" optionValue="categoryid" [showClear]="true" class="ng-invalid ng-dirty"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                                </ng-container>
+                                                    <small id="status-help" class="p-error">{{errorStatus}}</small>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="category">Property Category</label>
+                                                <ng-container *ngIf="!errorCategory">
+                                                    <p-dropdown [options]="catHouselist" [showClear]="true" aria-describedby="category-help"
+                                                    formControlName="cateTofhouseid" placeholder="Property Category"
+                                                    optionLabel="cateTofhousename" optionValue="cateTofhouseid"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                                </ng-container>
+                                                <ng-container *ngIf="errorCategory">
+                                                    <p-dropdown [options]="catHouselist" [showClear]="true" aria-describedby="category-help"
+                                                    formControlName="cateTofhouseid" placeholder="Property Category" class="ng-invalid ng-dirty"
+                                                    optionLabel="cateTofhousename" optionValue="cateTofhouseid"
+                                                    [style]="{'width' :'100%'}"></p-dropdown>
+                                                </ng-container>
+                                                <small id="category-help" class="p-error">{{errorCategory}}</small>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="price">Price (USD)</label>
+                                                <ng-container *ngIf="!errorPrice">
+                                                    <p-inputNumber [inputStyle]="{width: '330px'}" formControlName="price" inputId="currency-us" mode="currency" [showClear]="true" placeholder="Enter Price"
+                                                    currency="USD" locale="en-US"  [min]="0" aria-describedby="price-help">
+                                                    </p-inputNumber>
+                                                </ng-container>
+                                                <ng-container *ngIf="errorPrice">
+                                                    <p-inputNumber formControlName="price" inputId="currency-us" mode="currency" [showClear]="true" placeholder="Enter Price"
+                                                    currency="USD" locale="en-US" [inputStyle]="{width: '330px'}" [min]="0" aria-describedby="price-help" class="ng-invalid ng-dirty">
+                                                    </p-inputNumber>
+                                                </ng-container>
+                                                <small id="price-help" class="p-error">{{errorPrice}}</small>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>                                  
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-4" >
+                                        <div class="form-group">
+                                            <label for="acreage">Acreage</label>
+                                            <ng-container *ngIf="!errorAcreage">
+                                                <p-inputNumber formControlName="acreage" suffix=" m2" [showClear]="true"
+                                                [inputStyle]="{width: '330px'}" placeholder="Enter acreage" [min]="0" aria-describedby="acreage-help">
+                                            </p-inputNumber>
+                                            </ng-container>
+                                            <ng-container *ngIf="errorAcreage">
+                                                <p-inputNumber formControlName="acreage" suffix=" m2" [showClear]="true"
+                                                [inputStyle]="{width: '330px'}" placeholder="Enter acreage" [min]="0" aria-describedby="acreage-help" class="ng-invalid ng-dirty">
+                                            </p-inputNumber>
+                                            </ng-container>
+                                            <small id="acreage-help" class="p-error">{{errorAcreage}}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nolivroom">Living Room</label>
+                                            <ng-container *ngIf="!errorNoLiv">
+                                                <p-inputNumber formControlName="nolivroom" suffix=" room"  [showClear]="true"
+                                                [inputStyle]="{width: '330px'}" placeholder="LivingRoom" [min]="0" aria-describedby="livroom-help">
+                                                </p-inputNumber>
+                                            </ng-container>
+                                            <ng-container *ngIf="errorNoLiv">
+                                                <p-inputNumber formControlName="nolivroom" suffix=" room"  [showClear]="true"
+                                                [inputStyle]="{width: '330px'}" placeholder="LivingRoom" [min]="0" aria-describedby="livroom-help" class="ng-invalid ng-dirty">
+                                                </p-inputNumber>
+                                            </ng-container>
+                                            <small id="livroom-help" class="p-error">{{errorNoLiv}}</small>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nobedroom">Bed Room</label>
+                                            <ng-container *ngIf="!errorNoBed">
+                                                <p-inputNumber formControlName="nobedroom" suffix=" room"  [showClear]="true"
+                                                [inputStyle]="{width: '330px'}" placeholder="BedRoom" [min]="0" aria-describedby="bedroom-help">
+                                            </p-inputNumber>
+                                            </ng-container>
+                                            <ng-container *ngIf="errorNoBed">
+                                                <p-inputNumber formControlName="nobedroom" suffix=" room"  [showClear]="true"
+                                                [inputStyle]="{width: '330px'}" placeholder="BedRoom" [min]="0" aria-describedby="bedroom-help" class="ng-invalid ng-dirty">
+                                            </p-inputNumber>
+                                            </ng-container>
+                                            <small id="bedroom-help" class="p-error">{{errorNoBed}}</small>
+                                        </div>
+                                    </div>
+    
+                                    
+                                    
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="nobathroom">Bath Room</label>
+                                          <ng-container *ngIf="!errorNoBath">
+                                              <p-inputNumber formControlName="nobathroom" suffix=" room" [showClear]="true"
+                                              [inputStyle]="{width: '330px'}" placeholder="BathRoom" [min]="0" aria-describedby="bathroom-help">
+                                          </p-inputNumber>
+                                          </ng-container>
+                                          <ng-container *ngIf="errorNoBath">
+                                              <p-inputNumber formControlName="nobathroom" suffix=" room" [showClear]="true"
+                                              [inputStyle]="{width: '330px'}" placeholder="BathRoom" [min]="0" aria-describedby="bathroom-help" class="ng-invalid ng-dirty">
+                                              </p-inputNumber>
+                                          </ng-container>
+                                          <small id="bathroom-help" class="p-error">{{errorNoBath}}</small>
+                                      </div>
+                                  </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="garden">Garden</label>
+                                          <ng-container *ngIf="!errorGarden">
+                                              <p-inputNumber formControlName="garden" suffix=" garden" [showClear]="true"
+                                              [inputStyle]="{width: '330px'}" placeholder="Garden" [min]="0" aria-describedby="garden-help">
+                                          </p-inputNumber>
+                                          </ng-container>
+                                          <ng-container *ngIf="errorGarden">
+                                              <p-inputNumber formControlName="garden" suffix=" garden" [showClear]="true"
+                                              [inputStyle]="{width: '330px'}" placeholder="Garden" [min]="0" aria-describedby="garden-help" class="ng-invalid ng-dirty">
+                                          </p-inputNumber>
+                                          </ng-container>
+                                          <small id="garden-help" class="p-error">{{errorGarden}}</small>
+                                      </div>
+                                  </div>
+  
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="bancony">Balcony</label>
+                                          <ng-container *ngIf="!errorBalcony">
+                                              <p-inputNumber formControlName="bancony" suffix=" balcony" [showClear]="true"
+                                              [inputStyle]="{width: '330px'}" placeholder="Balcony" [min]="0" aria-describedby="balcony-help">
+                                          </p-inputNumber>
+                                          </ng-container>
+                                          <ng-container *ngIf="errorBalcony">
+                                              <p-inputNumber formControlName="bancony" suffix=" balcony" [showClear]="true"
+                                              [inputStyle]="{width: '330px'}" placeholder="Balcony" [min]="0" aria-describedby="balcony-help" class="ng-invalid ng-dirty">
+                                          </p-inputNumber>
+                                          </ng-container>
+                                          <small id="balcony-help" class="p-error">{{errorBalcony}}</small>
+                                      </div>
+                                      
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content">Content</label>
+                                    <ckeditor formControlName="content" aria-describedby="content-help"></ckeditor>
+                                    <small id="content-help" class="p-error">{{errorContent}}</small>
+                                </div>
+                                
+                                <form [formGroup]="addImage">
+                                  <div class="form-group">
+                                      <label for="uploadimg">Upload news images</label>
+                                      <div class="mb-3">   
+                                          <input (change)="selectFile($event)" class="form-control" type="file" id="formFile" multiple="true">
+                                          <button *ngIf="!files" (click)="upload()" type="button" class="btn btn-primary mt-3" [disabled]="true">Upload images</button>
+                                          <button *ngIf="files" (click)="upload()" type="button" class="btn btn-primary mt-3" [disabled]="false">Upload images</button>
+                                        </div>  
+                                        <img *ngFor="let img of getImg" src="http://localhost:62361/images/new/{{img}}" alt="img" width="200" class="shadow-4" />                                                                 
+                                  </div>
+                                </form>
+                            </div>
+                
+                        </form>
+                        <ng-container *ngIf="newsid">
+                          <div class="card-footer">
+                              <button [routerLink]="['/privatesale/myproperties/review', {id: newsid}]" type="submit" class="btn btn-primary" [disabled]="false">Review</button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="!newsid">
+                          <div class="card-footer">
+                              <button type="submit" class="btn btn-primary" [disabled]="true">Review</button>
+                          </div>
+                        </ng-container>
+  
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  
+  
+  
+  
+  
+  

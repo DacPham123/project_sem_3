@@ -1,0 +1,105 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Package</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <router-outlet></router-outlet> --> 
+
+
+
+<div class="card">
+    <p-table #dt [value]="packages" [rows]="10" [paginator]="true" responsiveLayout="scroll"
+        [(selection)]="selectedPackage" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true"
+        scrollDirection="both" responsiveLayout="scroll"
+        [globalFilterFields]="['packageId','packagetitle','packageprice','readNewsStatus']" >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <div class="row">
+
+                    <div class="col-6">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" [routerLink]="['/superadmin/packageChange']"
+                        ></button>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <span class="p-input-icon-right" >
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Search..." [style]="{'height': '50px'}"/>
+                        </span>
+                    </div>
+
+                </div>
+               
+                
+            </div>
+           
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+
+                <th pSortableColumn="packageid" [style]="{'text-align':'center'}">Id<p-sortIcon field="packageid">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="packagetitle" [style]="{'text-align':'center'}" >Title <p-sortIcon field="packagetitle"></p-sortIcon><p-columnFilter type="text" field="packagetitle" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="packageprice" [style]="{'text-align':'center'}">Price <p-sortIcon field="packageprice"></p-sortIcon><p-columnFilter type="numeric" field="packageprice" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="packagedate" [style]="{'text-align':'center'}">Days <p-sortIcon field="packagedate"></p-sortIcon><p-columnFilter type="numeric" field="packagedate" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="noVVipnews" [style]="{'text-align':'center'}">Vip1 <p-sortIcon field="noVVipnews"></p-sortIcon><p-columnFilter type="numeric" field="noVVipnews" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="noVipnews" [style]="{'text-align':'center'}">Vip2 <p-sortIcon field="noVipnews"></p-sortIcon><p-columnFilter type="numeric" field="noVipnews" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="noNormalnews" [style]="{'text-align':'center'}">Nomal <p-sortIcon field="noNormalnews"></p-sortIcon><p-columnFilter type="numeric" field="noNormalnews" display="menu"></p-columnFilter>
+                </th>
+                <!-- <th pSortableColumn="packagecontent" [style]="{'width':'120px','text-align':'center'}" >Content <p-sortIcon field="readnewsstatus"> -->
+                <!-- </p-sortIcon> -->
+            <!-- </th> -->
+                <th [style]="{'width':'150px','text-align':'center'}">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-package>
+            <tr>
+                <td [style]="{'text-align':'center'}">PackageNo{{package.packageId}}</td>
+                <td [style]="{'text-align':'center'}">{{package.packagetitle}}</td>
+                <td [style]="{'text-align':'center'}">${{package.packageprice}}</td>
+                <td [style]="{'text-align':'center'}">{{package.packagedate}}</td>
+                <td [style]="{'text-align':'center'}">{{package.noVVipnews}}</td>
+                <td [style]="{'text-align':'center'}">{{package.noVipnews}}</td>
+                <td [style]="{'text-align':'center'}">{{package.noNormalnews}}</td>
+                <!-- <td [style]="{'text-align':'center'}">{{package.packagecontent}}</td> -->
+                
+
+                    <!-- <div style="width: 50px; height: 50px;">
+                    <div style="position: relative; display: inline;" class="speeddial-linear-demo">
+                        <p-speedDial [model]="items" radius="80" direction="left" type="semi-circle"></p-speedDial>     
+                    </div>
+                  </div> -->
+                  <td [style]="{'text-align':'center'}">
+                    <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning " [routerLink]="['/superadmin/packageChange',{id:package.packageId}]"></button>&nbsp;
+
+
+
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{packages ? packages.length : 0 }} customer.
+            </div>
+        </ng-template>
+    </p-table>
+    
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-toast></p-toast>

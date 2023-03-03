@@ -1,0 +1,82 @@
+
+<div class="inner-banner inner-bg8">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>My Messages Box</h3>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>           
+                 <li *ngIf="checkRole == 'admin'"><a routerLink="/admin" >Admin Dashboard</a></li>
+                 <li *ngIf="checkRole == 'privateseller'"><a routerLink="/privatesale" >My Dashboard</a></li>
+                 <li *ngIf="checkRole == 'visitor'"><a routerLink="/visitor" >My Dashboard</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>     
+                <li>My Messages Box</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" value="Unread" id="btnradio1" autocomplete="off" [(ngModel)]="container" (ngModelChange)="loadMessages()">
+            <label class="btn btn-outline-danger" for="btnradio1">Unread</label>
+          
+            <input type="radio" class="btn-check" name="btnradio" value="Inbox" id="btnradio2" autocomplete="off" [(ngModel)]="container" (ngModelChange)="loadMessages()">
+            <label class="btn btn-outline-danger" for="btnradio2">Inbox</label>
+          
+            <input type="radio" class="btn-check" name="btnradio" value="Outbox" id="btnradio3" autocomplete="off" [(ngModel)]="container" (ngModelChange)="loadMessages()">
+            <label class="btn btn-outline-danger" for="btnradio3">Outbox</label>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="messages?.length === 0">
+        <h3>No messages</h3>
+    </div>
+    
+    <div class="row" *ngIf="messages!.length > 0">
+        <table class="table table-hover" style="cursor: pointer;">
+            <tr>
+                <th style="width: 40%;">Message</th>
+                <th style="width: 20%;">From / To</th>
+                <th style="width: 20%;">Sent / Received</th>
+                <th style="width: 20%;"></th>
+            </tr>
+    
+            <tr *ngFor="let message of messages" routerLink="{{container === 'Outbox' ? '/messages/' + message.recipientUsername : '/messages/' + message.senderUsername}}">
+                <!-- routerLink="{{container === 'Outbox' ? '/messages/' + message.recipientUsername : '/messages/' + message.senderUsername}}" -->
+                <td>{{message.content}}</td>
+                <td >
+                    <div *ngIf="container === 'Outbox'">
+                        <strong>{{message.recipientUsername}}</strong>
+                    </div>
+                    <div *ngIf="container !== 'Outbox'">
+                        <strong>{{message.senderUsername}}</strong>
+                    </div>
+                </td>
+                <td>{{message.messageSent | date: 'short'}}</td>
+                <td>
+                    <button class="btn btn-outline-danger" (click)="deleteMessage(message.id)" (click)="$event.stopPropagation()">Delete</button>
+                </td>
+            </tr>
+        </table>
+    
+
+    </div>
+</div>
+
+
+        <div class="row">
+            <div class="col-lg-8">
+            </div>
+            <div class="col-lg-2">
+                <div class="cart-totals">
+                    <button class="default-btn default-hot-toddy" (click)="back()" >My DashBoard</button>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="cart-totals">
+                   <a routerLink="/messages/superadmin"><button class="default-btn default-hot-toddy" style="margin-bottom: 20px;">Chat Now</button></a> 
+                </div>
+            </div>
+        </div>            
+

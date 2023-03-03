@@ -1,0 +1,176 @@
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <!-- <h1 class="m-0">Profile</h1> -->
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <!-- <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+          <li class="breadcrumb-item active">Profile</li> -->
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-warning">
+          <div class="card-header">
+            <h3 class="card-title"><strong>Profile detail</strong></h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+
+          <ng-container *ngIf="editAccountForm != null">
+
+            <form [formGroup]="editAccountForm" (ngSubmit)="save()">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6" >
+                    <ng-container *ngIf="getphoto == null">
+                      <div class="image" style="text-align: center;">
+                        <img src="{{account.photo}}" class="img-circle elevation-2" alt="User Image" style="align-self: center;text-align: center;" style=" width:222px;height:222px;">
+                      </div>
+                    </ng-container>
+                   
+                    <ng-container *ngIf="getphoto != null">
+                      <div class="image">
+                        <img src="{{getphoto.photo}}" class="img-circle elevation-2" alt="User Image" style="align-self: center;text-align: center;" style=" width:222px;height:222px;">
+                      </div>                     
+                    </ng-container>
+                   <br>
+                   <br>
+                      <div class="mb-3">   
+                        <input (change)="selectFile($event)" class="form-control" type="file" id="formFile" multiple="true">
+                        <button *ngIf="file" (click)="upload()" type="button" class="btn btn-primary mt-2" style="margin-left: 100px;" [disabled]="false">Update avatar</button>
+                        <button *ngIf="!file" (click)="upload()" type="button" class="btn btn-primary mt-2" style="margin-left: 100px;" [disabled]="true">Update avatar</button>
+                      </div>             
+                  </div>
+                  <div class="col-md-3"></div>
+                </div>             
+
+            
+
+              <div class="form-group">
+                <label for="email">Username</label>
+                <br>
+                {{account.username}}
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ng-container *ngIf="!errorEmail">
+                      <input type="text" class="form-control" id="email" placeholder="Enter e-mail" aria-describedby="email-help" pInputText
+                      formControlName="email" >
+                    </ng-container>
+                  </div>
+                  </div>
+                  <ng-container *ngIf="errorEmail">
+                  <div class="row">
+                    <div class="col-lg-12">                     
+                        <input type="text" class="form-control" id="email" placeholder="Enter e-mail" aria-describedby="email-help" class="ng-invalid ng-dirty" pInputText
+                        formControlName="email" style="width: 100%;">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <small id="email-help" class="p-error" style="width: 100%;">{{errorEmail}}</small>  
+                    </div>
+                  </div>
+                  </ng-container>        
+              </div>
+              <div class="form-group">
+                <label for="fullname">Fullname</label>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ng-container *ngIf="!errorFullname">
+                      <input type="text" class="form-control" id="fullname" placeholder="Enter fullname" aria-describedby="name-help" pInputText
+                      formControlName="fullname" >
+                    </ng-container>
+                  </div>
+                  </div>
+                  <ng-container *ngIf="errorFullname">
+                    <div class="row">
+                      <div class="col-lg-12">                     
+                        <input type="text" class="form-control" id="fullname" placeholder="Enter fullname" aria-describedby="name-help" class="ng-invalid ng-dirty" pInputText
+                        formControlName="fullname" style="width: 100%;">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <small id="email-help" class="p-error" style="width: 100%;">{{errorFullname}}</small>  
+                      </div>
+                    </div>
+                  </ng-container> 
+                              
+              </div>
+           
+
+              <div class="form-group">
+                <label for="addresss">Address</label>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <input type="text" class="form-control" id="address" placeholder="Enter address"
+                    formControlName="addresss">
+                  </div>
+                  </div>             
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ng-container *ngIf="!errorPhone">
+                      <input type="text" class="form-control" id="phone" placeholder="Enter phone" 
+                      formControlName="phone" pInputText >
+                    </ng-container>
+                  </div>
+                </div>
+                <ng-container *ngIf="errorPhone">
+                  <div class="row">
+                    <div class="col-lg-12">                     
+                      <input type="text" class="form-control" id="phone" placeholder="Enter phone" formControlName="phone" 
+                        aria-describedby="phone-help" class="ng-invalid ng-dirty" pInputText style="width: 100%;">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <small id="email-help" class="p-error" style="width: 100%;">{{errorPhone}}</small>  
+                    </div>
+                  </div>
+                </ng-container>       
+              </div>
+            </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Edit Info</button>
+                <input type="hidden" formControlName="username">
+              </div>
+            </form>
+          </ng-container>
+
+
+        </div>
+        <!-- /.card -->
+      </div>
+      <div class="col-md-3">
+      </div>
+
+      <!-- /.col-md-6 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+<p-toast></p-toast>           

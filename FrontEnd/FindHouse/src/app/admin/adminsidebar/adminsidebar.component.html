@@ -1,0 +1,144 @@
+<a href="/home" class="brand-link">
+  <img src="assets/img/logo/logo1.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    style="opacity: .9">
+  <span class="brand-text font-weight-light" style="color: #495057;">FindHouse</span>
+</a>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <!-- Sidebar user panel (optional) -->
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="listing-side-host">
+      <img src="{{account?.photo}}" alt="Images" style="border-radius: 50%; width:150px;height:150px;margin-left: 30px;">
+
+      <a routerLink="#" class="d-block" style="color: #495057;margin-left: 30px;">{{account?.fullname}}</a>
+      </div>
+  </div>
+
+
+  <!-- Sidebar Menu -->
+  
+  <!-- /.sidebar-menu -->
+</div>
+<div class="mt-2">
+  
+
+<p-slideMenu [model]="items" 
+[style]="{'background-color': '#F5F5F5','color':'white','border':'none'}" 
+viewportHeight="550" ></p-slideMenu>
+</div>
+
+
+  <!-- Sidebar Menu -->
+  <!-- <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"> -->
+      <!-- Add icons to the links using the .nav-icon class
+           with font-awesome or any other icon font library -->
+
+      <!-- <li class="nav-item">
+        <a  class="nav-link" style="cursor: pointer;">
+          <i class="pi pi-fw pi-users"></i>
+          <p style="color: white; font-size: larger;">
+            Account
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a [routerLink]="['/superadmin/account',{action: 2}]" class="nav-link">
+              <i class="pi pi-fw pi-users"></i>
+              <p style="color: white;">Admin</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/superadmin/account',{action: 3}]" class="nav-link">
+              <i class="pi pi-fw pi-users"></i>
+              <p style="color: white;">Agent</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/superadmin/account',{action: 4}]" class="nav-link">
+              <i class="pi pi-fw pi-users"></i>
+              <p style="color: white;">Private Seller</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/superadmin/account',{action: 5}]" class="nav-link">
+              <i class="pi pi-fw pi-users"></i>
+              <p style="color: white;">Visitor</p>
+            </a>
+          </li>
+
+
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/superadmin/news']" class="nav-link">
+          <i class="pi pi-fw pi-images"></i>
+          <p style="color: white; font-size: larger;">
+            News
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/superadmin/address']" class="nav-link">
+          <i class="pi pi-fw pi-book"></i>
+          <p style="color: white;font-size: larger;">
+            Address
+          </p>
+        </a>
+
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/superadmin/category']" class="nav-link">
+          <i class="pi pi-fw pi-book"></i>
+          <p style="color: white;font-size: larger;">
+            Category
+          </p>
+        </a>
+
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/superadmin/package']" class="nav-link">
+          <i class="pi pi-fw pi-users"></i>
+          <p style="color: white;font-size: larger;">
+            Package
+          </p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a [routerLink]="['/superadmin/invoice']" class="nav-link">
+          <i class="pi pi-fw pi-book"></i>
+          <p style="color: white;font-size: larger;">
+            Invoice
+          </p>
+        </a>
+
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/superadmin/changePass']" class="nav-link">
+          <i class="pi pi-fw pi-user"></i>
+          <p style="color: white;font-size: larger;">
+            Change Password
+
+          </p>
+        </a>
+
+      </li>
+
+      <li class="nav-item">
+        <a [routerLink]="['/logout']" class="nav-link">
+          <i class="pi pi-fw pi-sign-out"></i>
+          <p style="color: white;font-size: larger;">
+            Logout
+          </p>
+        </a>
+      </li>
+    </ul>
+  </nav> -->
+  <!-- /.sidebar-menu -->
+<!-- </div> -->
+<!-- /.sidebar -->

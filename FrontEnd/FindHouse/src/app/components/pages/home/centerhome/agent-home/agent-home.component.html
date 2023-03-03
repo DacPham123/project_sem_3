@@ -1,0 +1,29 @@
+<div class="testimonial-area-two pt-100 pb-70">
+    <div class="container-fluid">
+        <!-- <div class="client-bg"> -->
+            <div class="section-title text-center">
+                <span>Our Agents are here to help you</span>
+                <h2><b>Meet Our </b>Agents</h2>
+            </div>
+               
+                <p-carousel [value]="agents" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                    <ng-template let-agent pTemplate="item">
+                       
+
+                        <div class="testimonial-item testimonial-item-bg2" style="width: 500px;">
+                            <h3>{{agent.fullName}}</h3>
+                            <span>{{agent.username}}</span>
+                            <p>Email: {{agent.email}}</p>
+                            <ul class="rating">
+                                <li><i class='bx bxs-star'></i></li>
+                                <li><i class='bx bxs-star'></i></li>
+                                <li><i class='bx bxs-star'></i></li>
+                                <li><i class='bx bxs-star'></i></li>
+                                <li><i class='bx bxs-star'></i></li>
+                            </ul>
+                            <div class="testimonial-top"><img src="{{agent.photo}}" alt="Images" style="height: 100px; width: 100px; object-fit: cover; padding: 5px 10px 0px 0px;" ></div>
+                        </div>
+                    </ng-template>
+                </p-carousel>
+    </div>
+</div>

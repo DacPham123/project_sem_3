@@ -1,0 +1,9 @@
+.btn-check:checked + .btn-outline-danger, .btn-check:active + .btn-outline-danger, .btn-outline-danger:active, .btn-outline-danger.active, .btn-outline-danger.dropdown-toggle.show {
+    color: #fff;
+    background-color: #f14300;
+    border-color: #f14300;
+}
+.btn-outline-danger {
+    color: #f14300;
+    border-color: #f14300;
+}

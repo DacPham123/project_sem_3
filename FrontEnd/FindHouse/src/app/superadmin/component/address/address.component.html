@@ -1,0 +1,96 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Address</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <router-outlet></router-outlet> -->
+
+
+
+<div class="row">
+    <div class="col-lg-4 col-12">
+        <div class="col-12" style="height: 300;">
+            <div class="row ">
+                <div class="col-6">
+                    <h3>Province</h3>
+                </div>
+                <div class="col-6" style="text-align: right;"><button pButton pRipple type="button" icon="pi pi-plus"
+                        class="p-button-rounded p-button-text" (click)="addProvince()"></button><button pButton pRipple
+                        type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                        (click)="updateProvince()"></button><button pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-text" (click)="deleteProvince()"></button></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <p-listbox [options]="province" [(ngModel)]="selectedProvince" optionLabel="provinceName"
+                [listStyle]="{'height':'250px'}" (onChange)="changePro()"></p-listbox>
+        </div>
+        <div class="col-12" style="height: 200;"></div>
+    </div>
+    <div class="col-lg-4 col-12">
+        <div class="col-12" style="height: 200;">
+            <div class="row">
+                <div class="col-6">
+                    <h3>City</h3>
+                </div>
+                <div class="col-6" style="text-align: right;"><button pButton pRipple type="button" icon="pi pi-plus"
+                        class="p-button-rounded p-button-text" (click)="addCity()"></button><button pButton pRipple
+                        type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                        (click)="updateCity()"></button><button pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-text" (click)="deleteCity()"></button></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <p-listbox [options]="cities" [(ngModel)]="selectedCity" optionLabel="citiName"
+                [listStyle]="{'height':'250px'}" (onChange)="changeCity()"></p-listbox>
+        </div>
+        <div class="col-12" style="height: 200;"></div>
+    </div>
+    <div class="col-lg-4 col-12">
+        <div class="col-12" style="height: 200;">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Ward</h3>
+                </div>
+                <div class="col-6" style="text-align: right;"><button pButton pRipple type="button" icon="pi pi-plus"
+                        class="p-button-rounded p-button-text" (click)="addWard()"></button><button pButton pRipple
+                        type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                        (click)="updateWard()"></button><button pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-text" (click)="deleteWard()"></button></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <p-listbox [options]="wards" [(ngModel)]="selectedWard" optionLabel="wardName"
+                [listStyle]="{'height':'250px'}"></p-listbox>
+        </div>
+        <div class="col-12" style="height: 200;"></div>
+    </div>
+
+
+</div>
+
+<p-dialog header="" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+    [resizable]="false" [style]="{'width':'300px'}">
+    <div class="m-0" style="text-align:center ; ">
+        <h5>{{func}}</h5>
+    </div>
+    <br>
+    <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your Username"
+        placeholder="" [(ngModel)]="dataSet">
+    <div class="col-lg-12"
+        style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+        {{errorText}}</div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="save()" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+<p-toast></p-toast>

@@ -1,0 +1,39 @@
+
+    <div class="listing-widget-into">
+        <ng-container *ngIf="newsload!= null">
+        <div class="row" >
+            <div class="col-lg-6 col-md-6" *ngFor=" let n of newsload">
+                <div class="place-list-item">
+                    <div class="images">
+                        <a routerLink="/newsdetail/{{n.newsid}}" class="images-list"><img src="{{n.photonew}}" alt="Images"></a>
+
+                        <div class="place-profile">
+                            <img src="{{n.userimg}}" alt="Images">
+                            <h3>By, {{n.username}}</h3>
+                        </div>
+
+                        <div class="place-status bg-dark-orange">
+                            <a routerLink="/newsdetail/{{n.newsid}}"><h3>{{n.newTypeName}} New</h3></a>
+                        </div>
+
+                        <div class="place-tag">
+                            <span><a href="#">$$$ &nbsp; {{n.price}}</a></span>
+                            <h3 class="title"><a routerLink="/newsdetail/{{n.newsid}}">{{n.category}}</a></h3>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <a routerLink="/newsdetail/{{n.newsid}}"><h3>{{n.title}}</h3></a> 
+                        <p><i class="flaticon-cursor"></i> {{n.province}},&nbsp;{{n.city}},&nbsp;{{n.ward}}</p>                       
+                    </div>
+                </div>                
+            </div>
+
+        </div>
+        </ng-container>
+
+        <div class="col-lg-12 text-center"> 
+            <p>{{coutshowitem}}/{{totalitem}}</p>
+            <button type="submit" class="default-btn border-radius" (click)="loadmore()">Load More <i class='bx bx-plus'></i></button>
+        </div>
+    </div>

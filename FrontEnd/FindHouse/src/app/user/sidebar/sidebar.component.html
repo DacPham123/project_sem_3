@@ -1,0 +1,33 @@
+<!-- Main Sidebar Container -->
+
+<!-- Brand Logo -->
+<a href="/home" class="brand-link">
+  <img src="assets/img/logo/logo1.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    style="opacity: .9">
+  <span class="brand-text font-weight-light" style="color: #495057;">FindHouse</span>
+</a>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <!-- Sidebar user panel (optional) -->
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="listing-side-host">
+      <img src="{{account?.photo}}" alt="Images" style="border-radius: 50%; width:150px;height:150px;margin-left: 30px;">
+
+      <a routerLink="#" class="d-block" style="color: #495057;margin-left: 18px;">{{account?.fullname}}</a>
+      </div>
+  </div>
+
+
+  <!-- Sidebar Menu -->
+  
+  <!-- /.sidebar-menu -->
+</div>
+<div class="mt-2">
+  
+
+<p-slideMenu [model]="items" 
+[style]="{'background-color': '#F5F5F5','color':'white','border':'none'}" 
+viewportHeight="400" ></p-slideMenu>
+</div>

@@ -1,0 +1,187 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                 <h1 class="m-0" *ngIf="!sttUp"><button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-text" [style]="{'font-size': '100px'}" [routerLink]="['/superadmin/package']"></button> Add Package</h1>
+                 <h1 class="m-0" *ngIf="sttUp"><button pButton pRipple type="button" icon="pi pi-chevron-left" class="p-button-rounded p-button-text" [style]="{'font-size': '100px'}" [routerLink]="['/superadmin/package']"></button> Update Package</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title"><strong>Package</strong></h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form [formGroup]="addPackage" (ngSubmit)="save()">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-lg-12 ">
+                                        <div class="form-group">
+                                            <label for="title">Title</label>
+                                            <input type="text" name="title" id="title" class="form-control" required
+                                                data-error="Please enter title" formControlName="packagetitle">
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                                                {{errorTitle}}
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 ">
+                                        <div class="form-group">
+                                            <label for="title">Price</label><br>
+                                            <!-- <input type="text" name="price" id="price" class="form-control" required
+                                                data-error="Please enter price" formControlName="packageprice"> -->
+                                            <p-inputNumber name="price" id="price" formControlName="packageprice"
+                                                inputId="currency-us" mode="currency" currency="USD" locale="en-US"  [style]="{'height':'40px', 'width':'350px'}">
+                                            </p-inputNumber>
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                                                {{errorPrice}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6 ">
+                                        <div class="form-group">
+                                            <label for="days">Number of days</label><br>
+                                            <p-inputNumber formControlName="packagedate" mode="decimal"
+                                                inputId="withoutgrouping" [useGrouping]="false" 
+                                                [style]="{'height':'40px', 'width':'350px'}" [min]="1"  *ngIf="sttUp" [disabled]="true">
+                                            </p-inputNumber>
+                                            <p-inputNumber formControlName="packagedate" mode="decimal"
+                                            inputId="withoutgrouping" [useGrouping]="false" 
+                                            [style]="{'height':'40px', 'width':'350px'}" [min]="1" *ngIf="!sttUp">
+                                        </p-inputNumber>
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                                                {{errorDays}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 ">
+                                        <div class="form-group">
+                                            <label for="title">Vip news</label>
+
+                                            <p-inputNumber formControlName="noVVipnews" mode="decimal"
+                                                inputId="withoutgrouping" [useGrouping]="false"
+                                                [style]="{'height':'40px'}" *ngIf="sttUp" [disabled]="true">
+                                            </p-inputNumber>
+                                            <p-inputNumber formControlName="noVVipnews" mode="decimal"
+                                            inputId="withoutgrouping" [useGrouping]="false"
+                                            [style]="{'height':'40px'}"  *ngIf="!sttUp">
+                                        </p-inputNumber>
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red" >
+                                                {{errorVip}}
+                                            </div>
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                                                {{errorVip}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-4 ">
+                                        <div class="form-group">
+                                            <label for="title">Special news</label>
+
+                                            <p-inputNumber formControlName="noVipnews" mode="decimal"
+                                                inputId="withoutgrouping" [useGrouping]="false"
+                                                [style]="{'height':'40px'}" *ngIf="sttUp" [disabled]="true">
+                                            </p-inputNumber>
+                                            <p-inputNumber formControlName="noVipnews" mode="decimal"
+                                                inputId="withoutgrouping" [useGrouping]="false"
+                                                [style]="{'height':'40px'}" *ngIf="!sttUp" >
+                                            </p-inputNumber>
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                                                {{errorSpecial}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-4 ">
+                                        <div class="form-group">
+                                            <label for="title">Normal news</label>
+
+                                            <p-inputNumber formControlName="noNormalnews" mode="decimal"
+                                                inputId="withoutgrouping" [useGrouping]="false"
+                                                [style]="{'height':'40px'}" *ngIf="sttUp" [disabled]="true">
+                                            </p-inputNumber>
+                                            <p-inputNumber formControlName="noNormalnews" mode="decimal"
+                                                inputId="withoutgrouping" [useGrouping]="false"
+                                                [style]="{'height':'40px'}"*ngIf="!sttUp"  >
+                                            </p-inputNumber>
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                                                {{errorNormal}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 ">
+                                        <div class="form-group">
+                                            <label for="float-input">Content</label>
+                                            <span class="p-float-label">
+                                                <input type="text" name="float-input" id="float-input"
+                                                    class="form-control" required data-error="Please enter Content"
+                                                    formControlName="packagecontent">
+                                            </span>
+                                            <div class="col-lg-12"
+                                                style="height: 0px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                                                {{errorContent}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.card-body -->
+
+                        <div class="card-footer" style="text-align: right;">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+            </div>
+
+
+            <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+<!-- /.content -->
+<p-toast></p-toast>

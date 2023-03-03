@@ -1,0 +1,61 @@
+<div class="inner-banner" *ngIf="vipnew !=null" style="background-image: url({{vipnew.photo}});">
+    <div class="container" >
+        <div class="inner-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="inner-banner-text">
+                        <h3>{{vipnew.title}}</h3>
+                        <ul>
+                            <li><i class="flaticon-cursor"></i>{{vipnew.province}}, {{vipnew.city}}, {{vipnew.ward}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner-bottom">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="banner-tag">
+                        <ul>
+                            <li><a routerLink="/newsdetail/{{vipnew.newsid}}"><i class="flaticon-favorite"></i>Vip New</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="banner-profile">
+                        <p-avatar image="{{vipnew.userimg}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+                        <h3>By, {{vipnew.username}}</h3>
+                        <div class="banner-status">
+                            <a routerLink="/newsdetail/{{vipnew.newsid}}"><h3>Show Now</h3></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="banner-list">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-7">
+                    <ul class="list">
+                        <li><a href="/home">Home</a></li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li class="active">News Details</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 col-md-5">
+                    <ul class="social-link">
+                        <li><a href="#" target="_blank"><i class='bx bxl-facebook'></i></a></li> 
+                        <li><a href="#" target="_blank"><i class='bx bxl-twitter'></i></a></li> 
+                        <li><a href="#" target="_blank"><i class='bx bxl-instagram'></i></a></li> 
+                        <li><a href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a></li> 
+                        <li><a href="#" target="_blank"><i class='bx bxl-youtube'></i></a></li> 
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

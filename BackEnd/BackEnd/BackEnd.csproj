@@ -1,0 +1,93 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\account\admin1.jpg" />
+    <None Include="wwwroot\images\account\admin2.jpg" />
+    <None Include="wwwroot\images\account\agent1.jpg" />
+    <None Include="wwwroot\images\account\agent2.jpg" />
+    <None Include="wwwroot\images\account\agent3.jpg" />
+    <None Include="wwwroot\images\account\noavatar.jpg" />
+    <None Include="wwwroot\images\account\seller1.jpg" />
+    <None Include="wwwroot\images\account\seller2.jpg" />
+    <None Include="wwwroot\images\account\sun.jpg" />
+    <None Include="wwwroot\images\account\superadmin.jpg" />
+    <None Include="wwwroot\images\account\visitor1.jpg" />
+    <None Include="wwwroot\images\account\visitor2.jpg" />
+    <None Include="wwwroot\images\account\visitor3.jpg" />
+    <None Include="wwwroot\images\new\img1.jpg" />
+    <None Include="wwwroot\images\new\img15.jpg" />
+    <None Include="wwwroot\images\new\img16.jpg" />
+    <None Include="wwwroot\images\new\img17.jpg" />
+    <None Include="wwwroot\images\new\img18.jpg" />
+    <None Include="wwwroot\images\new\img19.jpg" />
+    <None Include="wwwroot\images\new\img2.jpg" />
+    <None Include="wwwroot\images\new\img20.jpg" />
+    <None Include="wwwroot\images\new\img3.jpg" />
+    <None Include="wwwroot\images\new\img4.jpg" />
+    <None Include="wwwroot\images\new\img5.jpg" />
+    <None Include="wwwroot\images\new\img6.jpg" />
+    <None Include="wwwroot\images\new\img7.jpg" />
+    <None Include="wwwroot\images\new\img8.jpg" />
+    <None Include="wwwroot\images\new\img9.jpg" />
+    <None Include="wwwroot\images\new\limg1.jpg" />
+    <None Include="wwwroot\images\new\limg10.jpg" />
+    <None Include="wwwroot\images\new\limg11.jpg" />
+    <None Include="wwwroot\images\new\limg12.jpg" />
+    <None Include="wwwroot\images\new\limg13.jpg" />
+    <None Include="wwwroot\images\new\limg14.jpg" />
+    <None Include="wwwroot\images\new\limg15.jpg" />
+    <None Include="wwwroot\images\new\limg2.jpg" />
+    <None Include="wwwroot\images\new\limg3.jpg" />
+    <None Include="wwwroot\images\new\limg4.jpg" />
+    <None Include="wwwroot\images\new\limg5.jpg" />
+    <None Include="wwwroot\images\new\limg6.jpg" />
+    <None Include="wwwroot\images\new\limg7.jpg" />
+    <None Include="wwwroot\images\new\limg8.jpg" />
+    <None Include="wwwroot\images\new\limg9.jpg" />
+    <None Include="wwwroot\images\new\video-area-bg-3.jpg" />
+    <None Include="wwwroot\images\new\ximg1.jpg" />
+    <None Include="wwwroot\images\new\ximg10.jpg" />
+    <None Include="wwwroot\images\new\ximg2.jpg" />
+    <None Include="wwwroot\images\new\ximg21.jpg" />
+    <None Include="wwwroot\images\new\ximg22.jpg" />
+    <None Include="wwwroot\images\new\ximg23.jpg" />
+    <None Include="wwwroot\images\new\ximg24.jpg" />
+    <None Include="wwwroot\images\new\ximg3.jpg" />
+    <None Include="wwwroot\images\new\ximg31.jpg" />
+    <None Include="wwwroot\images\new\ximg32.jpg" />
+    <None Include="wwwroot\images\new\ximg33.jpg" />
+    <None Include="wwwroot\images\new\ximg34.jpg" />
+    <None Include="wwwroot\images\new\ximg4.jpg" />
+    <None Include="wwwroot\images\new\ximg5.jpg" />
+    <None Include="wwwroot\images\new\ximg6.jpg" />
+    <None Include="wwwroot\images\new\ximg7.jpg" />
+    <None Include="wwwroot\images\new\ximg8.jpg" />
+    <None Include="wwwroot\images\new\ximg9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Graph.Core" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
+
+</Project>

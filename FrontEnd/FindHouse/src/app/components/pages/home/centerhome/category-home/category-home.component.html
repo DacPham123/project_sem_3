@@ -1,0 +1,52 @@
+<section class="category-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title ">
+            <span>The Categories</span>
+            <h2>Search <b>By Category</b></h2>
+        </div>
+        <div class="row pt-45">
+
+            <div *ngFor="let cat of cateofHouses" class="col-lg-2 col-sm-6">
+                <div class="category-box">
+                    <!-- <a routerLink="/categoryofhouse/{{}}"></a> -->
+                    <a routerLink="/categoryofhouse/{{cat.cateTofhouseid}}"><h3>{{cat.cateTofhousename}}</h3></a>
+                </div>
+            </div>
+
+            <!-- <div class="col-lg-2 col-sm-6">
+                <div class="category-box-card">
+                    <a routerLink="/category"><img src="/assets/img/home-one/shophouse.png"/></a>
+                    <a routerLink="/category"><h3>Shophouse</h3></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-sm-6">
+                <div class="category-box">
+                    <a routerLink="/category"><img src="/assets/img/home-one/house.png"/></a>
+                    <a routerLink="/category"><h3>House</h3></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-sm-6">
+                <div class="category-box">
+                    <a routerLink="/category"><img src="/assets/img/home-one/house-1.png"/></a>
+                    <a routerLink="/category"><h3>Mansion</h3></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-sm-6">
+                <div class="category-box">
+                    <a routerLink="/category"><img src="/assets/img/home-one/villa.png"/></a>
+                    <a routerLink="/category"><h3>Villa</h3></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-sm-6">
+                <div class="category-box">
+                    <a routerLink="/category"><i class="flaticon-flower"></i></a>
+                    <a routerLink="/category"><h3>Land</h3></a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>

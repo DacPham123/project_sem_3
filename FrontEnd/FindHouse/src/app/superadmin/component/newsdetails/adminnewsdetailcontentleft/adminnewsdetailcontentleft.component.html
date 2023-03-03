@@ -1,0 +1,188 @@
+<div class="listing-details-wrap" *ngIf="news != null">
+    <div class="listing-widget gallery-slider">
+        <div class="content-header">
+
+            <div class="row">
+                <div class="col-sm-11">
+                    <h3 class="title">{{news.title}}</h3>
+                </div><!-- /.col -->
+                <div class="col-sm-1" *ngIf="news.newTypeName !=null">
+                    <div class="place-status bg-dark-orange" style="position: absolute;
+                  top: 30px;
+                  right: -10px;
+                  padding: 5px 15px 5px 25px;
+                  -webkit-clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 13% 50%, 0% 0%);
+                  clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 13% 50%, 0% 0%);">
+                        <a routerLink="/">
+                            <h3>{{news.newTypeName}} New</h3>
+                        </a>
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+        </div>
+
+        <p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{'max-width': '660px', 'margin-top':'2em','margin-left':'50px'}" [numVisible]="5"
+            thumbnailsPosition="bottom">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item.photo"
+                    style="max-width: 660px; display: block; max-height: 396px; min-height: 396px;" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+                <div class="grid grid-nogutter justify-content-center" style="width: fit-content;">
+                    <img [src]="item.photo" style="max-height:100px ; width: auto;" />
+                </div>
+            </ng-template>
+        </p-galleria>
+
+
+
+    </div>
+
+    <div class="listing-widget listing-widget-desc">
+        <h3 class="title">Description</h3>
+        <div [innerHTML]="content"></div>
+
+    </div>
+
+
+    <adminifarme></adminifarme>
+    <div class="content" *ngIf="report!=null && (report.reportstatus==1|| report.reportstatus==4||report.reportstatus==3)">
+        <div class="card card-warning">
+            <div class="card-body" style="height: 100px;" style="font-size: larger;">
+                <div class="form-group">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-lg-12" style="text-align: center;">
+                            <div *ngIf="report.reportstatus!=1&&report.reportstatus!=4">This news has report
+                                {{reportname}}</div>
+                            <div *ngIf="report.reportstatus==1||report.reportstatus==4">This news has been reported
+                                {{reportname}}</div>
+                            <h5></h5>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 35px;">
+        <div style="font-size: larger; text-align: left;" class="col-lg-3">
+
+
+            Status News:
+
+            <div *ngIf="news.newstatus==0&&news.agentstatus!=3&&news.agentstatus!=4 && news.adminstatus!=4"
+                style="color: orange;">
+                <strong>Wait Active</strong>
+            </div>
+            <div *ngIf="news.newstatus==1&&news.agentstatus!=3&&news.agentstatus!=4 && news.adminstatus!=4"
+                style="color: green;">
+                <strong>Active</strong>
+            </div>
+            <div *ngIf="news.newstatus==2&&news.agentstatus!=3&&news.agentstatus!=4 && news.adminstatus!=4"
+                style="color: red;">
+                <strong>Lock By Admin</strong>
+            </div>
+            <div *ngIf="news.newstatus==5&&news.agentstatus!=3&&news.agentstatus!=4 && news.adminstatus!=4"
+                style="color: #0a0dbb96;">
+                <strong>Disable</strong>
+            </div>
+            <div *ngIf="news.newstatus==3&&news.agentstatus!=3&&news.agentstatus!=4 && news.adminstatus!=4"
+                style="color: red;">
+                <strong>Lock By SuperAdmin</strong>
+            </div>
+            <div *ngIf="news.newstatus==4 &&news.agentstatus!=3&&news.agentstatus!=4 && news.adminstatus!=4"
+                style="color: red;">
+                <strong>Expired</strong>
+            </div>
+            <div *ngIf="(news.agentstatus==4||news.agentstatus==3) && news.adminstatus!=4 && news.agentuser!=null"
+                style="color: red;">
+                <strong>Agent Is Locked</strong>
+            </div>
+            <div *ngIf="(news.agentstatus==4||news.agentstatus==3) && news.adminstatus!=4 && news.agentuser===null "
+                style="color: red;">
+                <strong>Private Sale Is Locked</strong>
+            </div>
+            <div *ngIf="news.adminstatus==4" style="color: red;">
+                <strong>Admin Is Locked</strong>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+        <div class="col-lg-2" style="text-align: left;">
+            <ng-container *ngIf="report!=null && reportstatus!=2"> <button pButton pRipple type="button" label="Active"
+                    class="p-button-success" icon="pi pi-lock-open" [style]="{'width':'120px','text-align':'center'}"
+                    *ngIf="news.newstatus == 3" (click)="active2()"></button></ng-container>
+            <ng-container *ngIf=" (report==null || reportstatus==2)">
+           
+                <ng-container
+                    *ngIf="(news.newstatus==1||news.newstatus==3)&&news.agentstatus!=4&&news.agentstatus!=3&&news.adminstatus!=4&& (report==null || reportstatus==2) " >
+                    <button pButton pRipple type="button" label="Active" class="p-button-success" icon="pi pi-lock-open"
+                        [style]="{'width':'120px','text-align':'center'}" *ngIf="news.newstatus == 3"
+                        (click)="active()"></button>
+                    <button pButton pRipple type="button" label="Lock" class="p-button-danger" icon="pi pi-lock"
+                        [style]="{'width':'120px','text-align':'center'}" *ngIf="news.newstatus == 1"
+                        (click)="displayModal=true;remark='';"></button>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="report!=null && (report.reportstatus==0||report.reportstatus==3)">
+                <div class="row">
+                    <div class="col-lg-6"><button pButton pRipple type="button" label="Accept" class="p-button-success"
+                            icon="pi pi-lock-open" [style]="{'width':'120px','text-align':'center'}"
+                            (click)="accept()"></button></div>
+
+                </div>
+            </ng-container>
+
+        </div>
+        <div class="col-lg-3">
+            <ng-container *ngIf="report!=null && (report.reportstatus==0||report.reportstatus==3)">
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <button pButton pRipple type="button" label="Reject" class="p-button-danger" icon="pi pi-lock"
+                            [style]="{'width':'120px','text-align':'center'}" (click)="reject()"></button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+    </p-confirmDialog>
+    <p-dialog header="Remark" [(visible)]="displayModal" [modal]="true" [style]="{'width': '400px'}" [draggable]="false"
+        [resizable]="false">
+        <div style="height: 150px; width: 350px;">
+            <textarea rows="15" cols="40" pInputTextarea
+                [style]="{'width':'350px', 'height':'200px', 'max-height': '150px', 'min-height':'150px'}"
+                [(ngModel)]="remark"></textarea>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="lock()" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+
+    <p-dialog header="" [(visible)]="displayModal3" [modal]="true" [style]="{width: '5vw'}" [style]="{height: '5vw'}"
+    [draggable]="false" [resizable]="false" [closable]="false">
+
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class=" col-12">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4"><img src="../../assets/images/account/Spin-1s-200px.gif"
+                            style="text-align: center;" /></div>
+                    <div class="col-4"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <br><br>
+    </ng-template>
+</p-dialog>
+    <p-toast></p-toast>

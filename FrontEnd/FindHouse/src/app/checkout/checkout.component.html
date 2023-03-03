@@ -1,0 +1,43 @@
+
+
+<div class="inner-banner inner-bg6">
+    <div class="container">
+        <div class="inner-title text-center">
+            <h3>Check Out</h3>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>           
+                 <li *ngIf="checkRole == 'admin'"><a routerLink="/admin" >Admin Dashboard</a></li>
+                 <li *ngIf="checkRole == 'privateseller'"><a routerLink="/privatesale" >My Dashboard</a></li>
+                 <li *ngIf="checkRole == 'visitor'"><a routerLink="/visitor" >My Dashboard</a></li>
+                <li><i class='bx bx-chevron-right'></i></li>     
+                <li>Check Out</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<section class="cart-wraps-area ptb-70">
+    <div class="container" *ngIf="packageid !=null">
+      
+        <div class="col-lg-6" style="margin-left:25% ;">
+            <div class="cart-totals">
+                <h3>Payment Infomation</h3>
+                <ul>
+                    <li>Package Id: <span style="color:black ;"><b> {{packageid}}</b></span></li>
+                    <li>Payment Amount: <span style="color:black ;"><b> $ {{paymentamout}}</b></span></li>
+                    <li>UserName: <span style="color:black ;"><b>{{useradmin }}</b></span></li>
+                </ul>
+               
+             
+                
+               <div ><ngx-paypal [config]="payPalConfig"></ngx-paypal> </div> 
+            </div>
+
+        </div>
+      
+            
+    </div>
+</section>
+
+<p-toast ></p-toast>

@@ -1,0 +1,116 @@
+
+        <div class="card">       
+          <p-table #dt [value]="listReport" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first" 
+          responsiveLayout="scroll" [rowHover]="true" dataKey="reportid" styleClass="p-datatable-listReport"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+              [filterDelay]="0" [globalFilterFields]="['title','categoryname','cateTofhouse','provincename', 'newTypeName']">
+              <ng-template pTemplate="caption">
+                <div class="table-header">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <h5>List of Report News</h5>
+                    </div>
+                    <div class="col-md-8"></div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="reportid">
+                      <div class="flex justify-content-between align-items-center">
+                        Report Id 
+                        <p-sortIcon field="reportid"></p-sortIcon>
+                      </div>
+                    </th>
+
+                      <th pSortableColumn="newsid">                       
+                          News Id <p-sortIcon field="newsid"></p-sortIcon>                         
+                      </th>
+
+                      <th pSortableColumn="createdday">
+                          Created date <p-sortIcon field="createdday"></p-sortIcon>                                                              
+                      </th>
+
+                      <th pSortableColumn="remark">Remark<p-sortIcon field="remark"></p-sortIcon></th>
+                      <th pSortableColumn="politicsreason">Politics Reason<p-sortIcon field="politicsreason"></p-sortIcon></th>
+                      <th pSortableColumn="cheatreason">Cheat Reason<p-sortIcon field="cheatreason"></p-sortIcon></th>
+                      <th pSortableColumn="reportstatus">Status<p-sortIcon field="reportstatus"></p-sortIcon></th>
+                      <th pSortableColumn="reportstatus">Remark check<p-sortIcon field="reportstatus"></p-sortIcon></th>
+                  </tr>
+              </ng-template>
+
+
+<!-- 0: report mới tạo, " waiting check"
+1: report là đúng,supper admin đã xử lý. " checked-true"
+2: report là sai,supperadmin đã xử lý, "checl-false"
+3: report tin lừa đảo, đã warning, "send warning mail"
+4:report được xử lý tự động, news bị report tự động chuyển sang bị khóa bởi supperadmin (newsstt=3) 
+-----
+5: supperadmin/admin gửi tin nhắn/remark về news đến private saller hoặc agent
+6: private saller hoặc agent checked  -->
+
+              <ng-template pTemplate="body" let-report>
+                  <tr>
+                      <td>{{report.reportid}}</td>
+                      <td>{{report.newsid}}</td>
+                      <td>{{report.createdday | date: 'dd/MM/yyyy'}}</td>
+                      <td>{{report.remark ? report.remark : 'No remark'}}</td>
+                      <td>{{report.politicsreason ? report.politicsreason : 0}}</td>
+                      <td>{{report.cheatreason ? report.cheatreason : 0}}</td>                    
+                      <td>
+                        <span class="p-column-title">status</span>  
+                        <span class="image-text" *ngIf="report.reportstatus==0" style="background-color: #b3e5fc;color: #23547b;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">Waiting superadmin check</span>         
+                        <span class="image-text" *ngIf="report.reportstatus==1" style="background-color: #ea8c7f;color: #ad1d0a;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">News's rule violation</span>                       
+                        <span class="image-text" *ngIf="report.reportstatus==2" style="background-color: #d6e8f0;color: #112294;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">News's not violated</span>  
+                        <span class="image-text" *ngIf="report.reportstatus==3" style="background-color: #e3de99;color: #a88809;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">Report not correct</span> 
+                        <span class="image-text" *ngIf="report.reportstatus==4" style="background-color: #f0afa9;color: #952708;box-sizing: border-box;border-radius: 2px;
+                        padding: 0.25em 0.5rem;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        font-size: 12px;
+                        letter-spacing: .3px;">News's locked</span>    
+                         <span class="image-text" *ngIf="report.reportstatus==5" style="background-color: #dce4d0;color: #0b4d0b;box-sizing: border-box;border-radius: 2px;
+                         padding: 0.25em 0.5rem;
+                         text-transform: uppercase;
+                         font-weight: 700;
+                         font-size: 12px;
+                         letter-spacing: .3px;">New remark</span> 
+                          <span class="image-text" *ngIf="report.reportstatus==6" style="background-color: #c2e7e5;color: #0f2077;box-sizing: border-box;border-radius: 2px;
+                          padding: 0.25em 0.5rem;
+                          text-transform: uppercase;
+                          font-weight: 700;
+                          font-size: 12px;
+                          letter-spacing: .3px;">Remark checked</span>                    
+                      </td>
+                      <td *ngIf="report.reportstatus==5">
+                        <!-- <button label="Small" (click)="confirm($event, report.reportid)" pButton icon="pi pi-check" label="Remark checked" [disabled]="false"></button> -->
+                        <button (click)="confirm($event, report.reportid)" pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-outlined" [disabled]="false"></button>
+                      </td>
+                      <td *ngIf="report.reportstatus!=5"><button (click)="confirm($event, report.reportid)" pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-outlined" [disabled]="true"></button></td>
+                  </tr>
+                  <p-toast></p-toast>                    
+          <p-confirmPopup></p-confirmPopup>
+              </ng-template>
+          </p-table>
+         
+      </div>

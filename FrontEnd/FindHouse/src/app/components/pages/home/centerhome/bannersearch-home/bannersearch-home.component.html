@@ -1,0 +1,91 @@
+<div class="banner-form-area banner-form-mt">
+    <div class="container">
+        <div class="form-list text-center">
+            
+            <ul>
+                <li class="active" style="font-size: 20px; font-style: italic;"><i class="flaticon-curve-arrow"></i> FIND WHAT YOU LOOKING FOR?</li>
+                <!-- <li><i class="flaticon-curve-arrow"></i> RESTAURANTS</li>
+                <li><i class="flaticon-curve-arrow"></i> EVENTS</li>
+                <li><i class="flaticon-curve-arrow"></i> HOTELS</li> -->
+            </ul>
+        </div>
+
+        <div class="banner-form border-radius">
+            <form>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4" style=" width: 300px; ">
+                        <i class='flaticon-place' style="color: red; font-size: 23px;"></i>&nbsp;
+                            <p-dropdown [options]="provinces" [(ngModel)]="provinceId" placeholder="All Province"
+                              optionLabel="provinceName" optionValue="provinceId" [showClear]="true" [ngModelOptions]="{standalone: true}"
+                               [style]="{'width': '230px'}"></p-dropdown>
+                    </div>
+
+                    <!-- <div class="col-lg-3 col-md-4" style="padding: 0px; width: 250px;">
+                            <p-dropdown [options]="cities" (onChange)="sortWards()" [(ngModel)]="citiId" placeholder="All City" optionLabel="citiName" optionValue="citiId" [showClear]="true" [ngModelOptions]="{standalone: true}" [style]="{'width': '250px'}"></p-dropdown>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="col-lg-3 col-md-4" style="padding: 0px; width: 250px;">
+                            <p-dropdown [options]="wards" [(ngModel)]="wardId" placeholder="All Ward" optionLabel="wardName" optionValue="wardId" [showClear]="true" [ngModelOptions]="{standalone: true}" [style]="{'width': '230px'}"></p-dropdown>
+                    </div> -->
+                       
+                    <div class="col-lg-3 col-md-4" style=" width: 300px; ">
+                        <i class='flaticon-category' style="color: red; font-size: 23px;"></i>&nbsp;
+                            <p-dropdown [options]="cateofHouse" [(ngModel)]="cateTofhouseid" placeholder="All Categories" optionLabel="cateTofhousename" optionValue="cateTofhouseid" [showClear]="true" [ngModelOptions]="{standalone: true}" [style]="{'width': '230px'}"></p-dropdown>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4" style=" width: 300px; ">
+                        <i class='flaticon-hotel' style="color: red; font-size: 23px;"></i>&nbsp;
+                            <p-dropdown [options]="categories" [(ngModel)]="categoryid" placeholder="All Status" optionLabel="categoryname" optionValue="categoryid" [showClear]="true" [ngModelOptions]="{standalone: true}" [style]="{'width': '230px'}"></p-dropdown>
+                    </div>
+                    
+                    <div class="col-lg-2 col-md-4" style=" width: 230px;">
+                        <ng-container *ngIf="provinceId == null && cateTofhouseid == null && categoryid == null">
+                            <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/0/0/0">
+                                Search <i class="flaticon-loupe"></i>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="provinceId == null && cateTofhouseid != null && categoryid == null">
+                            <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/0/{{cateTofhouseid}}/0">
+                                Search <i class="flaticon-loupe"></i>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="provinceId == null && cateTofhouseid == null && categoryid != null">
+                            <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/0/0/{{categoryid}}">
+                                Search <i class="flaticon-loupe"></i>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="provinceId != null && cateTofhouseid != null && categoryid != null">
+                            <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/{{provinceId}}/{{cateTofhouseid}}/{{categoryid}}">
+                                Search <i class="flaticon-loupe"></i>
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="provinceId == null && cateTofhouseid != null && categoryid != null">
+                            <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/0/{{cateTofhouseid}}/{{categoryid}}">
+                                Search <i class="flaticon-loupe"></i>
+                            </button>
+                        </ng-container>
+
+                            <ng-container *ngIf="provinceId != null && cateTofhouseid == null && categoryid != null">
+                                <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/{{provinceId}}/0/{{categoryid}}">
+                                    Search <i class="flaticon-loupe"></i>
+                                </button>
+                            </ng-container>
+
+                            <ng-container *ngIf="provinceId != null && cateTofhouseid != null && categoryid == null">
+                                <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/{{provinceId}}/{{cateTofhouseid}}/0">
+                                    Search <i class="flaticon-loupe"></i>
+                                </button>
+                            </ng-container>
+
+                            <ng-container *ngIf="provinceId != null && cateTofhouseid == null && categoryid == null">
+                                <button type="submit" class="default-btn border-radius" (click)="search()" routerLink="/searchhome/{{provinceId}}/0/0">
+                                    Search <i class="flaticon-loupe"></i>
+                                </button>
+                            </ng-container>  
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>

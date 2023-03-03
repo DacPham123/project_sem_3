@@ -1,0 +1,50 @@
+<section class="city-area-two ptb-100"> 
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-8">
+                <div class="section-title">
+                    <span>Don't Miss!!!</span>
+                    <h2>All Special News</h2>                   
+                </div>
+
+            </div>
+
+            <p-carousel [value]="list" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="4065" 
+            [responsiveOptions]="responsiveOptions">
+                <ng-template let-n pTemplate="item">
+                    <div class="product-item" style="margin:0px 10px ;">
+                        <div class="product-item-content">
+                            <div class="place-list-item">
+                                <div class="images">
+                                    <a routerLink="/newsdetail/{{n.newsid}}" class="images-list"><img src="{{n.photo}}" alt="Images" style="height: 340px; width: 510px; object-fit: cover;"
+                                        ></a>
+            
+                                    <div class="place-profile">
+                                        <p-avatar image="{{n.userimg}}" styleClass="mr-2"  shape="circle" ></p-avatar>
+
+                                        <h3>By, {{n.username}}</h3>
+                                    </div>
+            
+                                    <div class="place-status bg-dark-orange">
+                                        <a routerLink="/newsdetail/{{n.newsid}}"><h3>{{n.newTypeName}} New</h3></a>
+                                    </div>
+            
+                                    <div class="place-tag">
+                                        <span><a href="#">$$$ &nbsp; {{n.price}}</a></span>
+                                        <h3 class="title"><a routerLink="/newsdetail/{{n.newsid}}">{{n.category}}</a></h3>
+                                    </div>
+                                </div>
+            
+                                <div class="content">
+                                    <a routerLink="/newsdetail/{{n.newsid}}"><h3>{{n.title}}...</h3></a> 
+                                    <p><i class="flaticon-cursor"></i> {{n.ward}},&nbsp;{{n.city}},&nbsp;{{n.province}}</p>                       
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>  
+        </div>
+
+    </div>
+</section>

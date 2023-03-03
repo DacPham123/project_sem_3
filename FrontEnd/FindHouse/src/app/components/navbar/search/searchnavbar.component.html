@@ -1,0 +1,22 @@
+
+
+<div class="search-overlay">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="search-layer"></div>
+            <div class="search-layer"></div>
+            <div class="search-layer"></div>
+            <div class="search-close">
+                <span class="search-close-line"></span>
+                <span class="search-close-line"></span>
+            </div>
+
+            <div class="search-form">
+                <form [formGroup]="searchform" >
+                    <input type="text" class="input-search" placeholder="Search. See. Love......" formControlName="key">
+                    <a [routerLink]="['/search', {keyword: keyword}]"><button type="submit" (click)="sendkeyword()"><i class="flaticon-loupe"></i></button></a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

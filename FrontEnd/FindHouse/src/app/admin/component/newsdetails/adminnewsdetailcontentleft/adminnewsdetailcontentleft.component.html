@@ -1,0 +1,50 @@
+
+<div class="listing-details-wrap" *ngIf="news != null">
+    <div class="listing-widget gallery-slider">
+        <div class="content-header">
+ 
+              <div class="row">
+                <div class="col-sm-11">
+                    <h3 class="title">{{news.title}}</h3>
+                </div><!-- /.col -->
+                <div class="col-sm-1" *ngIf="news.newTypeName !=null">
+                  <div class="place-status bg-dark-orange" style="position: absolute;
+                  top: 30px;
+                  right: -10px;
+                  padding: 5px 15px 5px 25px;
+                  -webkit-clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 13% 50%, 0% 0%);
+                  clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 13% 50%, 0% 0%);">
+                    <a routerLink="/"><h3>{{news.newTypeName}} New</h3></a>
+                  </div>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+
+        </div>
+        
+        <p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '660px', 'margin-top':'2em'}" [numVisible]="5"
+        thumbnailsPosition="bottom">
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.photo" style="max-width: 660px; display: block; max-height: 396px; min-height: 396px;" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item  >
+            <div class="grid grid-nogutter justify-content-center" style="width: fit-content;" >
+                <img [src]="item.photo" style="max-height:100px ; width: auto;"/>
+            </div>
+        </ng-template>
+    </p-galleria>
+        
+           
+    
+    </div>
+    
+    <div class="listing-widget listing-widget-desc">
+        <h3 class="title">Description</h3>
+        <div [innerHTML]="content"></div>
+  
+    </div>
+   
+
+     <adminifarme></adminifarme> 
+
+
+</div>

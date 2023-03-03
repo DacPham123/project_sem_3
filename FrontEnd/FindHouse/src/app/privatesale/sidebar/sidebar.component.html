@@ -1,0 +1,122 @@
+<!-- Main Sidebar Container -->
+
+<!-- Brand Logo -->
+<a href="/home" class="brand-link">
+  <img src="assets/img/logo/logo1.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    style="opacity: .9">
+  <span class="brand-text font-weight-light" style="color: #495057;">FindHouse</span>
+</a>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <!-- Sidebar user panel (optional) -->
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="listing-side-host">
+      <img src="{{account?.photo}}" alt="Images" style="border-radius: 50%; width:150px;height:150px;margin-left: 30px;">
+
+      <a routerLink="#" class="d-block" style="color: #495057;margin-left: 18px;">{{account?.fullname}}</a>
+      </div>
+  </div>
+
+
+  <!-- Sidebar Menu -->
+  
+  <!-- /.sidebar-menu -->
+</div>
+<div class="mt-2">
+  
+
+<p-slideMenu [model]="items" 
+[style]="{'background-color': '#F5F5F5','color':'white','border':'none'}" 
+viewportHeight="500" ></p-slideMenu>
+</div>
+
+
+
+  <!-- <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+           <li class="nav-item">
+            <a routerLink="/privatesale/profile" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p style="color: white;">
+                Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/privatesale/myproperties" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p style="color: white;">
+                My News
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a routerLink="/privatesale/myproperties/list" class="nav-link">
+                  &nbsp; &nbsp;<i class="pi pi-list"></i>
+                  <p style="color: white;"> &nbsp; List News</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="/privatesale/myproperties/add" class="nav-link">
+                  &nbsp;<i class="nav-icon fas fa-plus-circle"></i>
+                  <p style="color: white;">Add news</p>
+                </a>
+              </li>          
+            </ul>
+          </li>
+          
+          <li class="nav-item">
+            <a routerLink="/privatesale/invoice" class="nav-link">
+              &nbsp; <i class="pi pi-credit-card"></i>
+              <p style="color: white;">
+              &nbsp; Payment
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a routerLink="/privatesale/invoice" class="nav-link">
+                    &nbsp; &nbsp;<i class="pi pi-shopping-cart"></i>
+                  <p style="color: white;">&nbsp; Buy package</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="/privatesale/paymenthistory" class="nav-link">
+                  &nbsp; &nbsp;<i class="pi pi-history"></i>
+                  <p style="color: white;">&nbsp; History</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+    
+          <li class="nav-item">
+            <a routerLink="/privatesale/notification" class="nav-link">
+              <i class="nav-icon fas fa-bell"></i>
+              <p style="color: white;">
+                Notification
+                <span class="badge badge-info right">{{countReport}}</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/privatesale/changepass" class="nav-link">
+              <i class="nav-icon fas fa-user-edit"></i>
+              <p style="color: white;">
+                Change Password
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">
+              &nbsp;<i class="pi pi-power-off"></i>
+              <p style="color: white;">
+                &nbsp; Logout
+              </p>
+            </a>
+          </li>
+    </ul>
+  </nav> -->

@@ -1,0 +1,398 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Agents Management System</h1>
+        </div><!-- /.col -->
+        
+      </div><!-- /.row -->
+      <div class="row mb-2">
+        <div class="col-sm-10">
+         
+        </div><!-- /.col -->
+        <div class="col-sm-2">
+          <p-button label="Add New" icon="pi pi-plus" (click)="openNew()"></p-button>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card">
+  <p-table #dt [value]="customers" [(selection)]="selectedCustomers" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+  [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" responsiveLayout="scroll"
+  [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0" [globalFilterFields]="['username','fullname','phone','email','accstatus']">
+
+  <ng-template pTemplate="header">
+      <tr>
+      
+          <th pSortableColumn="username">
+              <div class="flex justify-content-between align-items-center">
+                UserName<br>
+                  <p-sortIcon field="username"></p-sortIcon>
+                  <p-columnFilter type="text" field="username" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+          
+          <th pSortableColumn="fullname">
+              <div class="flex justify-content-between align-items-center">
+                Name <br>
+                  <p-sortIcon field="fullname"></p-sortIcon>
+                  <p-columnFilter type="text" field="fullname" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+          <th pSortableColumn="phone">
+            <div class="flex justify-content-between align-items-center">
+              Phone <br>
+                <p-sortIcon field="phone"></p-sortIcon>
+                <p-columnFilter type="text" field="phone" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+        </th>
+          <th pSortableColumn="email">
+              <div class="flex justify-content-between align-items-center">
+                Email <br>
+                  <p-sortIcon field="email"></p-sortIcon>
+                  <p-columnFilter type="text" field="email" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+
+       
+          <th pSortableColumn="accstatus">
+              <div class="flex justify-content-between align-items-center">
+                  Status<br>
+                  <p-sortIcon field="accstatus"></p-sortIcon>
+                  <p-columnFilter type="text" field="accstatus" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+          
+          <th style="width: 8rem">Action</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-customer>
+      <tr class="p-selectable-row">
+          <td>
+              <span class="p-column-title">UserName</span>
+              <img [alt]="customer.username" src="{{customer.photo}}" width="25px" style="vertical-align: middle" />
+              {{customer.username}}
+          </td>
+          <td>
+              <span class="p-column-title">Name</span>
+              <span class="image-text">{{customer.fullname}}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Phone</span>
+            <span class="image-text">{{customer.phone}}</span>
+        </td>
+          <td>
+              <span class="p-column-title">Email</span>
+              
+              <span class="image-text">{{customer.email}}</span>
+          </td>
+         
+        
+          <td >
+              <span class="p-column-title">Status</span>
+              <span class="image-text" *ngIf="customer.accstatus==0" style="background-color: #b3e5fc;color: #23547b;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Waiting Active</span>
+              <span class="image-text" *ngIf="customer.accstatus==1" style="background-color: #c8e6c9;color: #256029;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Active</span>
+              <span class="image-text" *ngIf="customer.accstatus==2" style="background-color: #eccfff;color: #694382;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Lock By System</span>
+              <span class="image-text" *ngIf="customer.accstatus==3" style="background-color: #ffcdd2;color: #c63737;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Lock By Admin</span>
+              <span class="image-text" *ngIf="customer.accstatus==4" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Lock By SuperAdmin</span>
+
+          </td>         
+          <td style="text-align: center" *ngIf="customer.accstatus==0">
+
+            <button pButton pRipple type="button" icon="pi pi-play"
+            class="p-button-rounded p-button-text" title="Active"
+            (click)="activeuser( customer.username.trim(), 1)"></button>
+            <button pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show List News" (click)="showInfo(customer.username.trim())"></button>
+          </td>
+          <td style="text-align: center" *ngIf="customer.accstatus==1">
+
+            <button pButton pRipple type="button" icon="pi pi-lock"
+            class="p-button-rounded p-button-text" title="Lock User"
+            (click)="activeuser( customer.username.trim(), 3)"></button>
+            <button pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show List News" (click)="showInfo(customer.username.trim())"></button>
+          </td>
+          <td style="text-align: center" *ngIf="customer.accstatus==2">
+
+            <button pButton pRipple type="button" 
+            class="p-button-rounded p-button-text" title="" ></button>         
+            <button pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show List News" (click)="showInfo(customer.username.trim())"></button>
+          </td>
+          <td style="text-align: center" *ngIf="customer.accstatus==3">
+
+            <button pButton pRipple type="button" icon="pi pi-lock-open"
+            class="p-button-rounded p-button-text" title="UnLock User"
+            (click)="activeuser( customer.username.trim(), 1)"></button>
+            <button pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show List News" (click)="showInfo(customer.username.trim())"></button>
+          </td>
+          <td style="text-align: center" *ngIf="customer.accstatus==4">
+
+            <button pButton pRipple type="button" 
+            class="p-button-rounded p-button-text" title="" ></button>         
+            <button pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show List News" (click)="showInfo(customer.username.trim())"></button>
+          </td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+      <tr>
+          <td colspan="8">No List News found.</td>
+      </tr>
+  </ng-template>
+</p-table>
+
+</div>
+
+<p-confirmDialog [(visible)]="display1" [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<p-toast></p-toast>
+<p-dialog header="Agent Infomation" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    <section class="testimonial-area-three " style="background-image:none" *ngIf="account !=null">
+      <div class="container">
+          
+          <div class="row ">
+  
+              <div class="col-lg-12" >    
+                  <div class="testimonial-item testimonial-item-bg2">
+                          <h3>{{account.fullname}}</h3>   
+                          <div class="row ">                   
+                            <div class="col-lg-12" >                          
+                           <b>UserName:</b>  {{account.username}}     
+                            </div>                       
+                        </div>            
+                          <div class="row ">   
+                              <div class="col-lg-12" >                            
+                                <b>Address:</b>    {{account.addresss}}   
+                              </div>                          
+                          </div>
+                          <div class="row ">   
+                              <div class="col-lg-12" >                          
+                                <b> Email:</b>   {{account.email}}     
+                              </div>    
+                          </div>
+                          <div class="row ">                   
+                              <div class="col-lg-12" >                          
+                                <b>Phone:</b>    {{account.phone}}     
+                              </div>                       
+                          </div>
+                          <div class="row " *ngIf="account.accstatus !=0">                   
+                            <div class="col-lg-12" >                          
+                              <b>List News:</b> <a [routerLink]="['/admin/shownewsagent/',{useragent: account.username}]"> &nbsp; Click Here</a>    
+                            </div>                       
+                        </div>
+                      <div class="testimonial-top" style="top:20px"><img src="{{account.photo}}" alt="Images" style="width:150px;height:165px;margin-left: 30px;"></div>
+                  </div>
+              </div>
+  
+          </div>
+      </div>
+  </section>
+
+        
+<ng-template pTemplate="footer">
+<p-button icon="pi pi-user-edit" (click)="showEdit(account.username)" label="Edit" styleClass="p-button-text"></p-button>
+<p-button icon="pi pi-check" (click)="display=false" label="Ok" styleClass="p-button-text"></p-button>
+</ng-template>       
+</p-dialog>
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<p-toast></p-toast>
+<p-dialog header="Agent Infomation" [(visible)]="editdisplay" [modal]="true" [style]="{width: '450px'}"
+    [draggable]="false" [resizable]="false">
+    <ng-container *ngIf="editAccountForm !=null">
+      <form [formGroup]="editAccountForm" (ngSubmit)="update()">
+    <section class="testimonial-area-three " style="background-image:none" *ngIf="account !=null">
+
+            <div class="row "> 
+              <div class="col-lg-12" >    
+                  <div class="testimonial-item testimonial-item-bg2">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+  
+                          <input type="email" name="email" id="email" class="form-control" required
+                              data-error="Please enter email" placeholder="Email" formControlName="email">
+                          <div class="col-lg-12"
+                              style="height: 10px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                              {{errorEmail}}</div>
+                      </div>
+                  </div>
+                  <div class="col-lg-12">
+                      <div class="form-group">
+                          <input type="email" name="phone" id="phone" class="form-control" required
+                              data-error="Please enter phone" placeholder="Phone" formControlName="phone"
+                              oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                          <div class="col-lg-12"
+                              style="height:10px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                              {{errorPhone}}</div>
+                      </div>
+                  </div>                                   
+                </div>
+              </div>              
+            </div>
+
+            <div class="row ">
+              <div class="col-lg-12" > 
+                <div class="testimonial-item testimonial-item-bg2" style="padding-top: 0px;">
+                  
+                  <input type="hidden" formControlName="username">
+                  <input type="submit" value="save" class="default-btn" >
+                </div>
+              </div>
+            </div>
+     
+  </section>
+
+
+    
+</form> 
+</ng-container>
+</p-dialog>
+
+
+
+<p-dialog header="Successful" [(visible)]="displayconfirmedit" [style]="{width: '300px'}">
+  <p> Successful!</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="displayconfirmedit=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+<p-dialog header="Erros" [(visible)]="displayerross" [style]="{width: '300px'}">
+  <p>  Update Erros!</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="displayerross=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+<p-dialog header="Infomation" [(visible)]="warning1" [style]="{width: '300px'}">
+  <p> Email no change.</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="warning1=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Infomation" [(visible)]="warning2" [style]="{width: '300px'}">
+  <p>  Phone no change</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="warning2=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Infomation" [(visible)]="warning3" [style]="{width: '300px'}">
+  <p> Account Infomation no change.</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="warning3=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+
+<form [formGroup]="addAccountForm" (submit)="save()">
+  <p-dialog [(visible)]="customerDialog" [style]="{width: '450px'}" header="Add Agent Account" [modal]="true"
+      styleClass="p-fluid">
+     
+      <ng-template pTemplate="content">
+
+          <div class="row">
+              <div class="col-lg-12 ">
+                  <div class="form-group">
+                      <input type="text" name="name" id="name" class="form-control" required
+                          data-error="Please enter agent Username" placeholder="Username" formControlName="username">
+                      <div class="col-lg-12"
+                          style="height: 10px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                          {{errorUsername}}</div>
+                  </div>
+              </div>
+              <div class="col-lg-12 ">
+                <div class="form-group">
+                    <input type="text" name="fullname" id="fullname" class="form-control" required
+                        data-error="Please enter agent fullname" placeholder="fullname" formControlName="fullname">
+                    <div class="col-lg-12"
+                        style="height: 10px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px; color:red">
+                        {{errorFullName}}</div>
+                </div>
+            </div>
+              <div class="col-lg-12">
+                  <div class="form-group">
+
+                      <input type="email" name="email" id="email" class="form-control" required
+                          data-error="Please enter email" placeholder="Email" formControlName="email">
+                      <div class="col-lg-12"
+                          style="height: 10px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                          {{errorEmail}}</div>
+                  </div>
+              </div>
+              <div class="col-lg-12">
+                  <div class="form-group">
+                      <input type="email" name="phone" id="phone" class="form-control" required
+                          data-error="Please enter phone" placeholder="Phone" formControlName="phone"
+                          oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                      <div class="col-lg-12"
+                          style="height:10px; text-align: left; margin: 0,0,0,0;  vertical-align: text-top; font-size: 14px;color:red">
+                          {{errorPhone}}</div>
+                  </div>
+              </div>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="footer">       
+          <button pButton pRipple type="submit" label="Create" icon="pi pi-check" class="p-button-text"></button>
+      </ng-template>
+    
+  </p-dialog>
+
+</form>
+
+
+
+
+
+
+<p-dialog header="" [(visible)]="displayModal2" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+    [resizable]="false" [closable]="false">
+    <h3 style="font-size: 30;">Add Account Dialog</h3>
+    <p class="m-0" style="font-size: 20px;"><br>{{dialogTitle2}}</p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="Ok" styleClass="p-button-text" (click)="displayModal2=false; customerDialog=false"></p-button>
+    </ng-template>
+</p-dialog>
+<p-dialog header="" [(visible)]="displayModal3" [modal]="true" [style]="{width: '5vw'}" [style]="{height: '5vw'}"
+    [draggable]="false" [resizable]="false" [closable]="false">
+
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class=" col-12">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4"><img src="../../assets/images/account/Spin-1s-200px.gif"
+                            style="text-align: center;" /></div>
+                    <div class="col-4"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <br><br>
+    </ng-template>
+</p-dialog>

@@ -1,0 +1,121 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Payment History</h1>
+        </div><!-- /.col -->
+        
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="card">
+  <p-table #dt [value]="listinvoice" [(selection)]="selectinvoices" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+  [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" responsiveLayout="scroll"
+  [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0" [globalFilterFields]="['invoiceId','username','packageid','paymentdate','expiredate','paymentid','invoiceStatus']">
+
+  <ng-template pTemplate="header">
+      <tr>
+      
+          <th pSortableColumn="invoiceId">
+              <div class="flex justify-content-between align-items-center">
+                  Invoice No<br>
+                  <p-sortIcon field="invoiceId"></p-sortIcon>
+                  <p-columnFilter type="text" field="invoiceId" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+          <th pSortableColumn="username">
+              <div class="flex justify-content-between align-items-center">
+                  Buyer <br>
+                  <p-sortIcon field="username"></p-sortIcon>
+                  <p-columnFilter type="text" field="username" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+
+          <th pSortableColumn="packageid">
+              <div class="flex justify-content-between align-items-center">
+                Package <br>
+                  <p-sortIcon field="packageid"></p-sortIcon>
+                  <p-columnFilter type="text" field="packageid" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+         
+          <th pSortableColumn="paymentdate">
+              <div class="flex justify-content-between align-items-center">
+                  Payment Date <br>
+                  <p-sortIcon field="paymentdate"></p-sortIcon>
+                  <p-columnFilter type="date" field="paymentdate" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+          </th>
+       
+     
+          <th pSortableColumn="invoiceStatus">
+            <div class="flex justify-content-between align-items-center">
+              Invoice Status<br>
+                <p-sortIcon field="invoiceStatus"></p-sortIcon>
+                <p-columnFilter type="text" field="invoiceStatus" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+        </th>
+        
+          <th style="width: 8rem"></th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-invoice>
+      <tr class="p-selectable-row">
+          <td>
+              <span class="p-column-title">Invoice No</span>
+              {{invoice.invoiceId}}
+          </td>
+          <td>
+              <span class="p-column-title">Buyer</span>
+              <span class="image-text">{{invoice.username}}</span>
+          </td>
+          <td>
+              <span class="p-column-title">Package</span>
+            
+              <span class="image-text">{{invoice.packageid}}</span>
+          </td>
+          <td>
+              <span class="p-column-title">Payment Date</span>
+              {{invoice.paymentdate | date: 'dd/MM/yyyy'}}
+          </td>
+         
+          <td >
+              <span class="p-column-title">invoiceStatus</span>
+              <span class="image-text" *ngIf="invoice.invoiceStatus==0" style="background-color: #b3e5fc;color: #23547b;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Buy new package</span>
+              <span class="image-text" *ngIf="invoice.invoiceStatus==1" style="background-color: #c8e6c9;color: #256029;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Upgarde package</span>
+              
+              <span class="image-text" *ngIf="invoice.invoiceStatus==3" style="background-color: #ffcdd2;color: #c63737;box-sizing: border-box;border-radius: 2px;
+              padding: 0.25em 0.5rem;
+              text-transform: uppercase;
+              font-weight: 700;
+              font-size: 12px;
+              letter-spacing: .3px;">Used package</span>
+             
+          </td>
+         
+          <td style="text-align: center">
+            <a [routerLink]="['/privatesale/paymendetails/',{invoiceid: invoice.invoiceId}]" ><button pButton pRipple type="button" icon="pi pi-info-circle" class="p-button-rounded p-button-text" title="Show Info"></button></a>
+          </td>
+      </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+      <tr>
+          <td colspan="8">No List News found.</td>
+      </tr>
+  </ng-template>
+</p-table>
+
+</div>

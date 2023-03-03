@@ -1,0 +1,133 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Invoices</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+
+<div class="card">
+  <p-table #dt [value]="invoices" [rows]="10" [paginator]="true" responsiveLayout="scroll" [rowHover]="true"
+    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true" scrollDirection="both" responsiveLayout="scroll"
+    [globalFilterFields]="['invoiceid','packageprice','packagename','username','paytimedate','expire','invoicestatus']"
+    (onFilter)="filters($event.filteredValue)">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <div class="row">
+
+          <div class="col-6" style="text-align: left;">
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"
+              (click)="exportExcel()"></button>
+          </div>
+          <div class="col-6" style="text-align: right;">
+            <span class="p-input-icon-right">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Search..." [style]="{'height': '50px'}" />
+            </span>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+
+        <th pSortableColumn="invoiceId" [style]="{'text-align':'center'}">Id<p-sortIcon field="invoiceId">
+          </p-sortIcon>
+        </th>
+        <th pSortableColumn="price" [style]="{'text-align':'center'}">Price<p-sortIcon
+            field="price">  
+          </p-sortIcon><p-columnFilter type="numeric" field="price" display="menu"></p-columnFilter>
+        </th>
+        <th pSortableColumn="packageprice" [style]="{'text-align':'center'}">Package Price<p-sortIcon
+            field="packageprice">  
+          </p-sortIcon><p-columnFilter type="numeric" field="packageprice" display="menu"></p-columnFilter>
+        </th>
+        <th pSortableColumn="packagename" [style]="{'text-align':'center'}">Package<p-sortIcon field="packagename">
+          </p-sortIcon>
+          <p-columnFilter type="text" field="packagename" display="menu"></p-columnFilter>
+        </th>
+        <th pSortableColumn="username" [style]="{'text-align':'center'}">Username<p-sortIcon field="username">
+          </p-sortIcon>
+          <p-columnFilter type="text" field="username" display="menu"></p-columnFilter>
+        </th>
+        <th pSortableColumn="paDate" [style]="{'text-align':'center'}">Pay Date<p-sortIcon field="paDate">
+          </p-sortIcon>
+          <p-columnFilter type="date" field="paDate" display="menu">
+          </p-columnFilter>
+        </th>
+        <th pSortableColumn="exDate" [style]="{'text-align':'center'}">Expire<p-sortIcon field="exDate">
+          </p-sortIcon>
+          <p-columnFilter type="date" field="exDate" display="menu">
+
+          </p-columnFilter>
+        </th>
+        <th pSortableColumn="invoiceStatus" [style]="{'text-align':'center'}">Status<p-sortIcon field="invoiceStatus">
+          </p-sortIcon>
+          <p-columnFilter field="invoiceStatus" matchMode="equals" display="menu">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                <ng-template let-option pTemplate="item">
+                  <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+          </p-columnFilter>
+
+        </th>
+
+
+        <!-- <th pSortableColumn="packagecontent" [style]="{'width':'120px','text-align':'center'}" >Content <p-sortIcon field="readnewsstatus"> -->
+        <!-- </p-sortIcon> -->
+        <!-- </th> -->
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-invoice>
+      <tr>
+        <td [style]="{'text-align':'center'}">Invoice{{invoice.invoiceId}}</td>
+        <td [style]="{'text-align':'center'}">${{invoice.price}}</td>
+        <td [style]="{'text-align':'center'}">${{invoice.packageprice}}</td>
+        <td [style]="{'text-align':'center'}">{{invoice.packagetitle}}</td>
+        <td [style]="{'text-align':'center'}">{{invoice.username}}</td>
+        <td [style]="{'text-align':'center'}">{{invoice.paymentDate}}</td>
+        <td [style]="{'text-align':'center'}">{{invoice.expire}}</td>
+        <td [style]="{'text-align':'center'}">
+
+          <div *ngIf="invoice.invoiceStatus==0" style="color: green;">
+            <strong>New</strong>
+          </div>
+          <div *ngIf="invoice.invoiceStatus==1" style="color: orange;">
+            <strong>Upgrade</strong>
+          </div>
+          <div *ngIf="invoice.invoiceStatus==3" style="color: red;">
+            <strong>Expire</strong>
+          </div>
+        </td>
+        <!-- <td [style]="{'text-align':'center'}">{{package.packagecontent}}</td> -->
+
+
+        <!-- <div style="width: 50px; height: 50px;">
+                <div style="position: relative; display: inline;" class="speeddial-linear-demo">
+                    <p-speedDial [model]="items" radius="80" direction="left" type="semi-circle"></p-speedDial>     
+                </div>
+              </div> -->
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{invoices ? invoices.length : 0 }} categories.
+      </div>
+    </ng-template>
+  </p-table>
+</div>

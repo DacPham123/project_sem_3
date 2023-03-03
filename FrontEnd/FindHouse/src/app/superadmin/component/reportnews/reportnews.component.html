@@ -1,0 +1,138 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">News</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <router-outlet></router-outlet> -->
+
+
+
+<div class="card">
+    <p-table #dt [value]="reportnews" [rows]="10" [paginator]="true" responsiveLayout="scroll"
+        [(selection)]="selectedNews" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true"
+        scrollDirection="both" responsiveLayout="scroll"
+        [globalFilterFields]="['newsid','created','touser','createdate']">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <div class="row">
+
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <span class="p-input-icon-right">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Search..." [style]="{'height': '50px'}" />
+                        </span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+
+                <th pSortableColumn="reportid" [style]="{'text-align':'center'}">Id<p-sortIcon field="reportid">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="newsid" [style]="{'text-align':'center'}">New ID <p-sortIcon field="newsid">
+                    </p-sortIcon>
+                    <p-columnFilter type="numeric" field="newsid" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="created" [style]="{'text-align':'center'}">Created <p-sortIcon field="created">
+                    </p-sortIcon>
+                    <p-columnFilter type="date" field="created" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="deadlineDate" [style]="{'text-align':'center'}">Deadline <p-sortIcon field="deadlineDate">
+                </p-sortIcon>
+                <p-columnFilter type="date" field="deadlineDate" display="menu"></p-columnFilter>
+            </th>
+                <th pSortableColumn="touser" [style]="{'text-align':'center'}">Username <p-sortIcon field="touser">
+
+                    </p-sortIcon>
+                    <p-columnFilter type="text" field="touser" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="politicsreason" [style]="{'text-align':'center'}">Report Type
+                </th>
+                <th pSortableColumn="reportstatus" [style]="{'text-align':'center'}">Status <p-sortIcon
+                        field="reportstatus">
+                    </p-sortIcon>
+                </th>
+
+                <th [style]="{'text-align':'center'}">Detail
+                </th>
+                <!-- <th pSortableColumn="packagecontent" [style]="{'width':'120px','text-align':'center'}" >Content <p-sortIcon field="readnewsstatus"> -->
+                <!-- </p-sortIcon> -->
+                <!-- </th> -->
+        </ng-template>
+        <ng-template pTemplate="body" let-report>
+            <tr>
+                <td [style]="{'text-align':'center'}">ReportNo{{report.reportid}}</td>
+                <td [style]="{'text-align':'center'}">NewsNo{{report.newsid}}</td>
+                <td [style]="{'text-align':'center'}">{{report.createdday}}</td>
+                <td [style]="{'text-align':'center'}">{{report.deadline}}</td>
+                <td [style]="{'text-align':'center'}">{{report.touser}}</td>
+                <td [style]="{'text-align':'center'}">{{report.politicsreason>=10?'Politic':'Cheat'}}</td>
+                <td [style]="{'text-align':'center'}">
+                    <div *ngIf="report.reportstatus==0" style="color: rgb(255, 208, 0);">
+                        <strong>Waiting Check</strong>
+                    </div>
+                    <div *ngIf="report.reportstatus==1" style="color: red;">
+                        <strong>Superadmin Accept</strong>
+                    </div>
+                    <div *ngIf="report.reportstatus==2" style="color: rebeccapurple;">
+                        <strong>Superadmin Reject</strong>
+                    </div>
+                    <div *ngIf="report.reportstatus==3" style="color: rgb(255, 123, 0);">
+                        <strong>Warning Cheat News</strong>
+                    </div>
+                    <div *ngIf="report.reportstatus==4" style="color: red;">
+                        <strong>Auto Block</strong>
+                    </div>
+
+                </td>
+                <!-- <td [style]="{'text-align':'center'}">{{package.packagecontent}}</td> -->
+
+
+                <!-- <div style="width: 50px; height: 50px;">
+                    <div style="position: relative; display: inline;" class="speeddial-linear-demo">
+                        <p-speedDial [model]="items" radius="80" direction="left" type="semi-circle"></p-speedDial>     
+                    </div>
+                  </div> -->
+                <td [style]="{'text-align':'center'}">
+                    <button pButton pRipple type="button" icon="pi pi-info" class="p-button-rounded p-button-info"
+                        [routerLink]="['/superadmin/newdetail',{newsid:report.newsid}]"></button>&nbsp;
+
+
+
+
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{reportnews ? reportnews.length : 0 }} reports.
+            </div>
+        </ng-template>
+    </p-table>
+
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-toast></p-toast>

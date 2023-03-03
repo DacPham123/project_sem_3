@@ -1,0 +1,177 @@
+
+<ng-container *ngIf="AcceptAds == true">
+    <div class="row" > 
+        <h3>This news has status: 
+            <span class="image-text" *ngIf="oldnewsstatus==0" style="background-color: #b3e5fc;color: #23547b;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Waiting Accept</span>
+        <span class="image-text" *ngIf="oldnewsstatus==1" style="background-color: #c8e6c9;color: #256029;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">On Pages</span>
+        <span class="image-text" *ngIf="oldnewsstatus==2" style="background-color: #eccfff;color: #694382;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Reject By You</span>
+        <span class="image-text" *ngIf="oldnewsstatus==3" style="background-color: #ffcdd2;color: #c63737;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Reject By SuperAdmin</span>
+        <span class="image-text" *ngIf="oldnewsstatus==4" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Expired</span>
+        <span class="image-text" *ngIf="oldnewsstatus==5" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Hide</span></h3>
+    </div>
+    <div class="row" *ngIf="oldnewsstatus!=newsstatus"> 
+        <h3>This news will has status: 
+            <span class="image-text" *ngIf="newsstatus==0" style="background-color: #b3e5fc;color: #23547b;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Waiting Accept</span>
+        <span class="image-text" *ngIf="newsstatus==1" style="background-color: #c8e6c9;color: #256029;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">On Pages</span>
+        <span class="image-text" *ngIf="newsstatus==2" style="background-color: #eccfff;color: #694382;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Reject By You</span>
+        <span class="image-text" *ngIf="newsstatus==3" style="background-color: #ffcdd2;color: #c63737;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Reject By SuperAdmin</span>
+        <span class="image-text" *ngIf="newsstatus==4" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Expired</span>
+        <span class="image-text" *ngIf="newsstatus==5" style="background-color: #ffd8b2;color: #805b36;box-sizing: border-box;border-radius: 2px;
+        padding: 0.25em 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: .3px;">Hide</span></h3>
+        </div>
+    <div class="row" *ngIf=" (oldnewsstatus != 3) && (oldnewsstatus != 2) && (oldnewsstatus != 5) " >
+        <div class="col-lg-6" >
+            <div class="cart-calc" style="height: 410px;">
+                <div class="cart-wraps-form" style="height: 410px;"> 
+                    <h3>Set News Status</h3>
+                    <div class="row">
+                        <div class="form-group col-lg-12">
+                            <div class="form-group">
+                                <p-dropdown [options]="listnewstatus"  [(ngModel)]="newstt" (onChange)="shownextacction1()" 
+                                placeholder="Select a status"
+                                    optionLabel="content"   [ngModelOptions]="{standalone: true}" [style]="{'width' :'400px'}" ></p-dropdown>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="cart-wraps-form" *ngIf="showReject ==1"> 
+                        <h3>Set News Advertisement Type</h3>
+        
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <div class="form-group">
+                                    <p-dropdown [options]="listnewstype"  [(ngModel)]="getnewstype" (onChange)="shownextacction2()" 
+                                    placeholder="Select a News Advertisement Type"
+                                        optionLabel="newstype1"   [ngModelOptions]="{standalone: true}" [style]="{'width' :'400px'}" showClear="true" ></p-dropdown>
+                                </div>
+                            </div>
+        
+                        </div>
+        
+                    </div>
+        
+                    <div class="cart-wraps-form" *ngIf="showReject ==0"> 
+                       <div class="row">
+                            <div class="form-group col-12">
+                                <input type="text" class="form-control" placeholder="Send some message to agent" style="height: 50px; width: 400px;" [(ngModel)]="rejectmsg">
+                            </div>
+        
+                        </div>
+        
+                    </div>
+                       
+                    
+                    <input type="button" class="default-btn" (click)="updatenews()" value="Save" *ngIf="showReject !=2">
+                   
+        
+                
+    
+
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6" *ngIf="getnewstype != null">
+            <div class="cart-totals" style="height: 410px;">
+                <h3></h3>
+                <ul *ngIf="getnewstype.newstypeid ==1">
+                    <li >Total {{getnewstype.newstype1}} news on your package<span >{{countvvip}}</span></li>
+                    <li >Total {{getnewstype.newstype1}} news you have set<span >{{countnewsonlist}}</span></li>
+                </ul>
+                <ul *ngIf="getnewstype.newstypeid ==2">
+                    <li >Total {{getnewstype.newstype1}} news on your package<span >{{countspecial}}</span></li>
+                    <li >Total {{getnewstype.newstype1}} news you have set<span >{{countnewsonlist}}</span></li>
+                </ul>
+                <ul *ngIf="getnewstype.newstypeid ==3">
+                    <li >Total {{getnewstype.newstype1}} news on your package<span >{{countordinary}}</span></li>
+                    <li >Total {{getnewstype.newstype1}} news you have set<span >{{countnewsonlist}}</span></li>
+                </ul>
+                <p style="color: red ;">{{msg}}</p>
+            </div>
+        </div>
+    </div>
+
+                
+</ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p-toast ></p-toast>

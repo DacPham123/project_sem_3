@@ -1,0 +1,102 @@
+<div class="listing-details-side" *ngIf="news !=null">
+    <div class="listing-widget-side">
+        <h3 class="title">Property Infomation</h3>
+
+        <ul class="listing-widget-list">
+            <li>Acreage <span style="float: right;">{{news.acreage}} m&#178;</span></li>
+            <li>Livingroom<span style="float: right;">{{news.nolivroom}}</span></li>
+            <li>Bedroom <span style="float: right;">{{news.nobedroom}}</span></li>
+            <li>Bathroom <span style="float: right;">{{news.nobathroom}}</span></li>
+            <li>Garden <span style="float: right;">{{news.garden}}</span></li>
+            <li>Bancony <span style="float: right;">{{news.bancony}}</span></li>
+
+        </ul>
+    </div>
+    <div class="listing-widget-side">
+        <h3 class="title">Address</h3>
+
+      <h3 class="price-title">{{news.wardname}}, {{news.cityname}}, {{news.provincename}}</h3> 
+    </div>
+
+    
+
+   
+
+    <div class="listing-widget-side">
+        <h3 class="title">Price</h3>
+        
+        <h3 class="price-title">Price : <span>{{news.price}} $$</span></h3>
+    </div>
+
+    <div class="listing-widget-side">
+        <h3 class="title">Hosted by :</h3>
+
+        <div class="listing-side-host">
+            <img src="{{news.userimg}}" alt="Images" style="border-radius: 50%; width:200px;height:200px">
+  
+            <h3>{{news.fullname}}</h3>
+ 
+        </div>
+
+
+        <ul class="listing-widget-list">
+            <li>Phone : <a href="tel:{{news.phone}}">{{news.phone}}</a></li>
+            <li>Mail : <a href="mailto:{{news.email}}">{{news.email}}</a></li>
+
+        </ul>
+
+        <ul class="social-link" *ngIf="agentuser ==null">
+            <li><a href="#" target="_blank"><i class='bx bxl-facebook'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-twitter'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-instagram'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-youtube'></i></a></li> 
+        </ul>
+    </div>
+
+    <div class="listing-widget-side listing-blog-post" *ngIf="agentuser !=null">
+        <h3 class="title">Company</h3>
+
+        <div class="listing-side-host">
+            <img src="{{agentuser.photo}}" alt="Images">
+            <h3>{{agentuser.fullname}}</h3>
+ 
+        </div>
+
+
+        <ul class="listing-widget-list">
+            <li>Phone : <a href="tel:{{agentuser.phone}}">{{agentuser.phone}}</a></li>
+            <li>Mail : <a href="mailto:{{agentuser.email}}">{{agentuser.email}}</a></li>
+
+        </ul>
+
+        <ul class="social-link">
+            <li><a href="#" target="_blank"><i class='bx bxl-facebook'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-twitter'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-instagram'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-pinterest-alt'></i></a></li> 
+            <li><a href="#" target="_blank"><i class='bx bxl-youtube'></i></a></li> 
+        </ul>
+    </div>
+   <ng-container *ngIf="username!='superadmin'">
+    <div class="listing-widget-side listing-blog-post" *ngIf="agentuser !=null ">
+        <h3 class="title">Report</h3>
+
+        <div style="margin: 15px;padding: 10px 30px 0 30px" >
+        
+            <p-dropdown [options]="reportreason"  [(ngModel)]="reason" 
+            placeholder="Choose a Reason" 
+            optionLabel="reasonname"   [ngModelOptions]="{standalone: true}" [style]="{'width' :'300px'}" [showClear]="true" (onChange)="showbutton()"></p-dropdown>
+        </div>
+
+        <div class="row" style="margin-top: 10px;" *ngIf="display==true">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6"> <button (click)="confirm1()" class=" default-btn" >Submit Report</button></div>
+            <div class="col-lg-3"></div>
+       </div>
+    </div>
+</ng-container>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<p-toast ></p-toast>

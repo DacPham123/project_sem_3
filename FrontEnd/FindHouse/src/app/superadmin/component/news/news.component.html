@@ -1,0 +1,169 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">News</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <router-outlet></router-outlet> -->
+
+
+
+<div class="card">
+    <p-table #dt [value]="news" [rows]="10" [paginator]="true" responsiveLayout="scroll" [(selection)]="selectedNews"
+        [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true" scrollDirection="both" responsiveLayout="scroll"
+        [globalFilterFields]="['packageId','title','username','createdate','provincename','price','categoryname','cateTofhouse']">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <div class="row">
+
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <span class="p-input-icon-right">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Search..." [style]="{'height': '50px'}" />
+                        </span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+
+                <th pSortableColumn="newsid" [style]="{'text-align':'center'}">Id<p-sortIcon field="newsid">
+                    </p-sortIcon>
+                </th>
+                <th pSortableColumn="title" [style]="{'text-align':'center'}">Title <p-sortIcon field="title">
+                    </p-sortIcon>
+                    <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="username" [style]="{'text-align':'center'}">Username <p-sortIcon field="username">
+                    </p-sortIcon>
+                    <p-columnFilter type="text" field="username" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="createDateFilter" [style]="{'text-align':'center'}">Created <p-sortIcon
+                        field="createDateFilter"></p-sortIcon>
+                    <p-columnFilter type="date" field="createDateFilter" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="provincename" [style]="{'text-align':'center'}">Province <p-sortIcon
+                        field="provincename"></p-sortIcon>
+                    <p-columnFilter type="text" field="provincename" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="price" [style]="{'text-align':'center'}">Price <p-sortIcon field="price">
+                    </p-sortIcon>
+                    <p-columnFilter type="numeric" field="price" display="menu"></p-columnFilter>
+                </th>
+
+                <th pSortableColumn="categoryname" [style]="{'text-align':'center'}">Category <p-sortIcon
+                        field="categoryname"></p-sortIcon>
+                    <p-columnFilter type="text" field="categoryname" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="cateTofhouse" [style]="{'text-align':'center'}">Category Of House <p-sortIcon
+                        field="cateTofhouse"></p-sortIcon>
+                    <p-columnFilter type="text" field="cateTofhouse" display="menu"></p-columnFilter>
+                </th>
+                <th pSortableColumn="newstatus" [style]="{'text-align':'center'}">Status <p-sortIcon field="newstatus">
+                    </p-sortIcon>
+                </th>
+                <!-- <th pSortableColumn="packagecontent" [style]="{'width':'120px','text-align':'center'}" >Content <p-sortIcon field="readnewsstatus"> -->
+                <!-- </p-sortIcon> -->
+                <!-- </th> -->
+                <th [style]="{'width':'150px','text-align':'center'}">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-newAds>
+            <tr>
+                <td [style]="{'text-align':'center'}">NewsNo{{newAds.newsid}}</td>
+                <td [style]="{'text-align':'center'}">{{newAds.title}}</td>
+                <td [style]="{'text-align':'center'}">{{newAds.username}}</td>
+                <td [style]="{'text-align':'center'}">{{newAds.createdate}}</td>
+                <td [style]="{'text-align':'center'}">{{newAds.provincename}}</td>
+                <td [style]="{'text-align':'center'}">${{newAds.price}}</td>
+                <td [style]="{'text-align':'center'}">{{newAds.categoryname}}</td>
+                <td [style]="{'text-align':'center'}">{{newAds.cateTofhouse}}</td>
+                <td [style]="{'text-align':'center'}">
+
+                    <div *ngIf="newAds.newstatus==0&&newAds.agentstatus!=3&&newAds.agentstatus!=4 && newAds.adminstatus!=4"
+                        style="color: orange;">
+                        <strong>Wait Active</strong>
+                    </div>
+                    <div *ngIf="newAds.newstatus==1&&newAds.agentstatus!=3&&newAds.agentstatus!=4 && newAds.adminstatus!=4"
+                        style="color: green;">
+                        <strong>Active</strong>
+                    </div>
+                    <div *ngIf="newAds.newstatus==2&&newAds.agentstatus!=3&&newAds.agentstatus!=4 && newAds.adminstatus!=4"
+                        style="color: red;">
+                        <strong>Lock By Admin</strong>
+                    </div>
+                    <div *ngIf="newAds.newstatus==5&&newAds.agentstatus!=3&&newAds.agentstatus!=4 && newAds.adminstatus!=4"
+                        style="color: #0a0dbb96;">
+                        <strong>Disable</strong>
+                    </div>
+                    <div *ngIf="newAds.newstatus==3&&newAds.agentstatus!=3&&newAds.agentstatus!=4 && newAds.adminstatus!=4"
+                        style="color: red;">
+                        <strong>Lock By SuperAdmin</strong>
+                    </div>
+                    <div *ngIf="newAds.newstatus==4 &&newAds.agentstatus!=3&&newAds.agentstatus!=4 && newAds.adminstatus!=4"
+                        style="color: red;">
+                        <strong>Expired</strong>
+                    </div>
+                    <div *ngIf="(newAds.agentstatus==4||newAds.agentstatus==3) && newAds.adminstatus!=4 && newAds.agentuser!=null"
+                        style="color: red;">
+                        <strong>Agent Is Locked</strong>
+                    </div>
+                    <div *ngIf="(newAds.agentstatus==4||newAds.agentstatus==3) && newAds.adminstatus!=4 && newAds.agentuser===null "
+                        style="color: red;">
+                        <strong>Private Sale Is Locked</strong>
+                    </div>
+                    <div *ngIf="newAds.adminstatus==4" style="color: red;">
+                        <strong>Admin Is Locked</strong>
+                    </div>
+
+
+                </td>
+                <!-- <td [style]="{'text-align':'center'}">{{package.packagecontent}}</td> -->
+
+
+                <!-- <div style="width: 50px; height: 50px;">
+                    <div style="position: relative; display: inline;" class="speeddial-linear-demo">
+                        <p-speedDial [model]="items" radius="80" direction="left" type="semi-circle"></p-speedDial>     
+                    </div>
+                  </div> -->
+                <td [style]="{'text-align':'center'}">
+                    <button pButton pRipple type="button" icon="pi pi-info" class="p-button-rounded p-button-info"
+                        [routerLink]="['/superadmin/newdetail',{newsid:newAds.newsid}]"></button>&nbsp;
+
+
+
+
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{news ? news.length : 0 }} news.
+            </div>
+        </ng-template>
+    </p-table>
+
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-toast></p-toast>
